@@ -1,0 +1,167 @@
+body{
+	/*background-color: #FCD0C1;*/
+    background-color: #fde3da;
+	color: #564244;
+}
+a {
+    color: #86A950;
+}
+a:hover{
+	color: #C4C853;
+}
+.m-inner{
+	background-color: #de7b7a !important;
+}
+.navbar .brand{
+	color: #FFF;
+}
+.m-inner .nav > li > a{
+	color: #007883;
+}
+.m-inner .nav > li > a:hover{
+	color: #0FB8B9;
+}
+.m-inner .nav .active > a, .m-inner .nav .active > a:hover{
+	color: #43505D;
+	background-color: #98D3D0;
+}
+.m-inner .nav > li > a:hover{
+	color: #98D3D0;
+	text-decoration: none;
+}
+.m-stats-item{
+	/*background-color: #b7526f;*/
+    background-color: #00574F;
+}
+.sidebar .nav-tabs.nav-stacked > li > a{
+	color: #007883;
+}
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+    color: #555555;
+    cursor: default;
+    background-color: #F0EFEA;
+}
+.m-sidebar-collapsed ul > li > a {
+    background-color: white !important;
+    text-align: center;
+}
+.nav > li > a:hover {
+    text-decoration: none;
+    background-color: #F0EFEA;
+}
+.bubble-arrow {
+    display: none;
+}
+
+.main-container{
+	background-color: #F0EFEA;
+	border-top: 0px;
+}
+.m-login-container{
+	background-color: #F0EFEA;
+	border: 1px solid rgba(150, 150, 150, 0.3);
+}
+.badge{
+    background-color: #95D3CD;
+}
+.navigation li.active a {background: #A74864; color: #fff;}
+.user-info-block .navigation {border-bottom: 1px solid #A74864; border-top: 1px solid #A74864;}
+.btn-primary { 
+    /*background-color: #00574C;*/
+    background-color: #A74864;
+    background-image: none;
+    border-color: #FFF;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:none;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
+    /*background-color: #5B9C64;*/
+    background-color: #F3888C;
+}
+.btn-danger { 
+    background-color: #bd362f;
+    background-image: none;
+    border-color: #FFF;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:none;
+}
+.btn-danger:hover, .btn-danger:active, .btn-danger.active, .btn-danger.disabled, .btn-danger[disabled] {
+    background-color: #DA696D; 
+}
+.label-important, .badge-important {
+    background-color: #DA696D;
+}
+
+.alert {
+    color: #947745;
+    background-color: #FFEA96;
+    border: 1px solid #deb25c;
+}
+.alert-info {
+    color: #48595f;
+    background-color: #D1EBE4;
+    border-color: #7a968f;
+}
+/*
+.alert-info {
+    color: #493038;
+    background-color: #f9c3a8;
+    border-color: #FCA67A;
+}*/
+.btn-info {  
+    background-color: #00BCAE;
+    background-image: none;
+    border-color: #FFF;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:none;
+}
+
+.btn-info:hover, .btn-info:active, .btn-info.active, .btn-info.disabled, .btn-info[disabled] {
+    background-color: #91D5CB; 
+}
+
+.label-info, .badge-info {
+    background-color: #a7c462;
+}
+.btn-warning { 
+    background-color:  #faa732;
+    background-image: none;
+    border-color: #FFF;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:none;
+}
+.btn-warning:hover, .btn-warning:active, .btn-warning.active, .btn-warning.disabled, .btn-warning[disabled] {
+    background-color:   #F6BE5E;
+}
+.label-warning, .badge-warning {
+    background-color: #F6BE5E;
+}
+.btn-success { 
+    background-color: #80AD51; 
+    background-image: none;
+    border-color: #FFF;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:none;
+}
+.label-success, .badge-success {
+    background-color: #80AD51;
+}
+.btn-success:hover, .btn-success:active, .btn-success.active, .btn-success.disabled, .btn-success[disabled] {
+    background-color: #B6C74E; 
+}
+.btn-inverse { 
+    background-color: #424F5C; 
+    background-image: none;
+    border-color: #FFF;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:none;
+}
+.btn-inverse:hover, .btn-inverse:active, .btn-inverse.active, .btn-inverse.disabled, .btn-inverse[disabled] {
+    background-color: #6C737E;
+}
+.label-inverse, .badge-inverse {
+    background-color: #6C737E;
+}
+.page-header {
+    border-bottom: 1px solid #43505D;
+}

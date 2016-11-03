@@ -1,0 +1,41 @@
+==== Mae Dashboard Template ====
+** Version 1.0
+	Init new layout
+
+	** Version 1.1
+		Created versions for girl/boy theme
+
+	** Version 1.2
+		Created general stylsheets and style guides
+
+=======================================		
+
+** Version 2.0
+	Updated all icons to fontawesome
+	Destroyed all useless pages
+	Created markup for actual screens for mae
+
+	** Version 2.1
+		PHP version to make all variables easy to change
+		Added JS for generic user generation
+		Updated markup for Logs, Baby Stats, and Dashboard
+
+	** Version 2.2
+		Made a fake login page
+
+
+========== 	   TO DO 	==============	
+	- General: 
+		connect to actual Mae backend 
+	- Dashboard: 
+		Finalize information displayed
+	- Logs: 
+		Finalize information displayed
+		Add ability to generate written log
+		Add functionality to open individual log information
+	- Baby Stats
+		Finalize information displayed
+	- Pediatrician
+		Finalize information displayed
+	- My Settings
+		Finalize information displayed
