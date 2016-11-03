@@ -1,5 +1,5 @@
 <?php 
-
+session_start(); 
 require_once('config.php'); ?>
 
 <!doctype html>
@@ -32,6 +32,13 @@ require_once('config.php'); ?>
     
 </head>
 <body>
+
+	<?php 
+
+	if( ( (strtolower($_SERVER['REQUEST_METHOD']) == 'post') && isset($_POST['password']) && ($_POST['password']==$GLOBALS['profile']['password']) ) || ( isset($_SESSION['con']) ) ): 
+	//if( ( (strtolower($_SERVER['REQUEST_METHOD']) == 'post') && isset($_POST['password']) && ($_POST['password']==$GLOBALS['profile']['password']) ) ): 
+		$_SESSION['con'] = true; 
+	?>
 	<div class="navbar navbar-fixed-top m-header">
 		<div class="navbar-inner m-inner">
 			<div class="container-fluid">
@@ -66,4 +73,36 @@ require_once('config.php'); ?>
 		</div>
 	</div>
 	<div class="m-top"></div>
-<?php ?>
+<?php else: ?> 
+
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span4"></div>
+			<div class="span4 ">
+				<div class="container-fluid m-login-container">
+					<div class="page-header">
+						<h2>M&auml;e <small>Login</small></h2>
+					</div>
+
+					<form class="form-horizontal" action=" " method="post">
+						<input type="text" placeholder="Enter username or email" class="span12" id="input01" name="uname">
+						<label></label>
+						<input type="password" placeholder="Enter password" class="span12" id="input01" name="password">
+
+			            <button type="submit" style="margin-top: 15px" class="btn btn-primary">	Login</button>
+						
+					</form>
+				</div>			
+			</div>
+			<div class="span4"></div>
+		</div>
+	</div>
+	</body>
+</html>
+<?php 
+die();
+endif; ?>
+
+
+
+
