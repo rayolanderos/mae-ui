@@ -3,6 +3,7 @@ $page_id = 1;
 
 require_once('../inc/header.php');
 require_once('../inc/sidebar.php');
+
 ?>
 	<div class="main-container">
 		<div class="container-fluid">
@@ -20,12 +21,12 @@ require_once('../inc/sidebar.php');
 						<div class="m-widget-body">
 							<div class="row-fluid">
 								<a href="#" class="span2 m-stats-item">
-									<span class="m-stats-val">2 units</span>
-									Feeding
+									<span class="m-stats-val">4 diapers</span>
+									Wet
 								</a>
 								<a href="#" class="span2 m-stats-item">
-									<span class="m-stats-val">4 diapers</span>
-									Disposables
+									<span class="m-stats-val">1 diapers</span>
+									Dirty
 								</a>
 								<a href="#" class="span2 m-stats-item">
 									<span class="m-stats-val">11 lbs</span>
@@ -37,14 +38,13 @@ require_once('../inc/sidebar.php');
 								</a>
 
 								<a href="#" class="span2 m-stats-item">
-									<span class="m-stats-val">97.5&deg;</span>
-									Temperature
-								</a href="#">
-
-								<a href="#" class="span2 m-stats-item">
 									<span class="m-stats-val">14</span>
 									Sleep Hours
-								</a href="#">			
+								</a href="#">	
+								<a href="#" class="span2 m-stats-item">
+									<span class="m-stats-val">4 log</span>
+									Entries
+								</a>		
 							</div>
 						</div>
 					</div>
@@ -96,6 +96,7 @@ require_once('../inc/sidebar.php');
 				</div>
 			</section>
 		</div>
+
 	</div>
 </body>
 </html>

@@ -1,7 +1,7 @@
-google.load('visualization', '1', {'packages': ['geochart', 'corechart']});
-google.setOnLoadCallback(drawChart);
 
-var isGirl = false;
+google.load('visualization', '1', {'packages': ['geochart', 'corechart']});
+
+google.setOnLoadCallback(drawChart);
 
 $(document).ready(function(){
 	$('.btn-chart').bind('click', function(){
@@ -38,22 +38,6 @@ function drawRegionsMap() {
 };
 
 function drawLineChart(chartType) {
-
-	var dataWeight = [
-			['Weeks', 'Your Baby', 'Average'],
-			['1',  10,      9],
-			['2',  10.2,      10],
-			['3',  10.5,       11],
-			['4',  11,      12]
-		];
-
-	var dataHeight = [
-		['Weeks', 'Your Baby', 'Average'],
-		['1',  20.1,      20],
-		['2',  21,      22],
-		['3',  25,       23],
-		['4',  26,      24]
-	];
 
 
 	var options = {

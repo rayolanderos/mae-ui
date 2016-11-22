@@ -15,19 +15,12 @@ require_once('inc/sidebar.php');
 
 					<div class="alert alert-info">
 						<button class="close" data-dismiss="alert">x</button>
-						<strong>Good Morning!</strong> You have 4 new messages
-						<a href="#">
-							<span class="label label-important">Read them!</span>	
+						<strong>Warning!</strong> You have not logged your baby's weight in over 10 days.
+						<a href="<?php echo $GLOBALS['root_url'];?>/logs">
+							<span class="label label-important">Log something now</span>	
 						</a>
 					</div>
 
-					<div class="alert">
-						<button class="close" data-dismiss="alert">x</button>
-						<strong>Warning!</strong> You have not logged your baby's weight in over 10 days.
-						<a href="#">
-							<span class="label label-info">Log something now!</span>	
-						</a>
-					</div>
 				</div>
 				<div class="row-fluid">
 					<div class="span4 m-widget">
@@ -46,23 +39,23 @@ require_once('inc/sidebar.php');
 								<tbody>
 									<tr>
 										<td>#0001</td>
-										<td><a href="#">Monday, October 10th</a></td>
+										<td><a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001">Monday, October 10th</a></td>
 										<td class="tr">
-											<a href="#" class="btn btn-primary">View</a>
+											<a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001" class="btn btn-primary">View</a>
 										</td>
 									</tr>
 									<tr>
 										<td>#0002</td>
-										<td><a href="#">Sunday, October 9th</a></td>
+										<td><a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001">Sunday, October 9th</a></td>
 										<td class="tr">
-											<a href="#" class="btn btn-primary">View</a>
+											<a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001" class="btn btn-primary">View</a>
 										</td>
 									</tr>
 									<tr>
 										<td>#0003</td>
-										<td><a href="#">Saturday, October 8th</a></td>
+										<td><a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001">Saturday, October 8th</a></td>
 										<td class="tr">
-											<a href="#" class="btn btn-primary">View</a>
+											<a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001" class="btn btn-primary">View</a>
 										</td>
 									</tr>
 								</tbody>
@@ -88,8 +81,8 @@ require_once('inc/sidebar.php');
 								</a>
 
 								<a href="#" class="span3 m-stats-item">
-									<span class="m-stats-val">97.5&deg;</span>
-									Temperature
+									<span class="m-stats-val">5</span>
+									Diapers
 								</a href="#">
 
 								<a href="#" class="span3 m-stats-item">

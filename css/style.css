@@ -247,6 +247,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .friend-details {
     margin-bottom: 25px;
+    width: 350px;
+    padding: 10px 0px;
 }
 .m-inner .nav > li > a:hover{
 	text-decoration: none;

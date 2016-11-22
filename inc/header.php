@@ -1,7 +1,8 @@
 <?php 
 session_start(); 
-require_once('config.php'); ?>
-
+require_once('config.php'); 
+$gender = $GLOBALS['profile']['baby_gender'];
+?>
 <!doctype html>
 <html>
 <head>
@@ -13,17 +14,45 @@ require_once('config.php'); ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root_url'];?>/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root_url'];?>/css/font-awesome.min.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,300i,400,400i,600,700" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root_url'];?>/css/<?php echo $GLOBALS['profile']['baby_gender'] ?>.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root_url'];?>/css/<?php echo $gender; ?>.css" />
 	
 	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/bootstrap.min.js"></script>
-	<?php if($page_id==0): ?>
-		<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/chart.js"></script>
-	<?php elseif ($page_id == 1): ?>
-		<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/stats.js"></script>
+	<?php if($page_id == 0 || $page_id ==1 ): ?>
+	<script type="text/javascript">
+		<?php if (  $gender == "girl" ): ?>
+			var isGirl = true;
+		<?php else : ?>
+			var isGirl = false;
+		<?php endif; ?>
+		<?php 
+		$avgs = $GLOBALS['baby_avgs']; 
+		//$stats = $GLOBALS['baby_stats']; ?>
+		var dataWeight = [
+			['Months', 'Your Baby', 'Average'],
+			<?php foreach ($avgs as $key => $avg) {
+				if($key<=6)
+					echo "['".$key."', ".($avgs[$key]["weight"][$gender] - 0.5).", ".$avgs[$key]["weight"][$gender]."],"."\n";
+				else
+					echo "['".$key."', null, ".$avgs[$key]["weight"][$gender]."],"."\n";
+			} ?>
+		];
+		var dataHeight = [
+			['Months', 'Your Baby', 'Average'],
+			<?php foreach ($avgs as $key => $avg) { 
+				echo "['".$key."', ".($avgs[$key]["length"][$gender] - 0.2).", ".$avgs[$key]["length"][$gender]."],"."\n";
+			} ?>
+		];
+		
+	</script>
+		<?php if($page_id==0): ?>
+			<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/chart.js"></script>
+		<?php elseif ($page_id == 1): ?>
+			<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/stats.js"></script>
+		<?php endif;?>
 	<?php endif;?>
 
 	<!--[if lt IE 9]>

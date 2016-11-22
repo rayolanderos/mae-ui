@@ -1,7 +1,6 @@
 google.load('visualization', '1', {'packages': ['geochart', 'corechart']});
 google.setOnLoadCallback(drawChart);
 
-var isGirl = false;
 
 $(document).ready(function(){
 	$('.btn-chart').bind('click', function(){
