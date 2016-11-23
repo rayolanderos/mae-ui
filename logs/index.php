@@ -11,10 +11,10 @@ require_once('../inc/sidebar.php');
 					<h1><?php echo $GLOBALS["pages"][$page_id]["title"]?></h1>
 				</div>
 
-				<table class="table table-striped table-condensed">
+				<table id="log-table" class="table table-striped table-condensed">
 					<thead>
 						<tr>
-							<th colspan="5">
+							<th colspan="2">
 								<form class="form-inline">
 									<label>Sort by:</label>
 									<select>
@@ -30,87 +30,36 @@ require_once('../inc/sidebar.php');
 								</form>
 
 							</th>
-							<th colspan="2">
+							<th colspan="4">
 								<button class="btn btn-primary pull-right">Add new text entry <i class="fa fa-plus" aria-hidden="true"></i></button>
 							</th>
 						</tr>
+						<?php $logs =  get_mae_api();  ?>
 						<tr>
-							<th></th>
 							<th>#</th>
-							<th>Title</th>
 							<th>Date</th>
+							<th class="tc">Input</th>
 							<th class="tc">Type</th>
-							<th class="tc">Status</th>
+							<th> Content </th>
 							<th class="tc"></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="favorite"><i class="fa fa-star" aria-hidden="true"></i></td>
-							<td>001</td>
-							<td>My first log</td>
-							<td>06:23 PM 2016-10-22</td>
-							<td class="tc"><i class="fa fa-volume-up" aria-hidden="true"></i></td>
-							<td class="tc"><span class="label label-success">Logged</span></td>
-							<td class="tc">
-								<a href="#" class="btn"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="favorite"><i class="fa fa-star-o" aria-hidden="true"></i></td>
-							<td>002</td>
-							<td>Baby's second day</td>
-							<td>02:45 AM 2016-10-24</td>
-							<td class="tc"><i class="fa fa-pencil" aria-hidden="true"></i></td>
-							<td class="tc"><span class="label label-success">Logged</span></td>
-							<td class="tc">
-								<a href="#" class="btn"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="favorite"><i class="fa fa-star" aria-hidden="true"></i></td>
-							<td>003</td>
-							<td>Evening bath</td>
-							<td>07:12 PM 2016-10-24</td>
-							<td class="tc"><i class="fa fa-volume-up" aria-hidden="true"></i></td>
-							<td class="tc"><span class="label label-success">Logged</span></td>
-							<td class="tc">
-								<a href="#" class="btn"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="favorite"><i class="fa fa-star-o" aria-hidden="true"></i></td>
-							<td>004</td>
-							<td>Tuesday morning log</td>
-							<td>09:15 AM 2016-10-25</td>
-							<td class="tc"><i class="fa fa-volume-up" aria-hidden="true"></i></td>
-							<td class="tc"><span class="label label-success">Logged</span></td>
-							<td class="tc">
-								<a href="#" class="btn"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="favorite"><i class="fa fa-star-o" aria-hidden="true"></i></td>
-							<td>005</td>
-							<td>Tuesday lunchtime log</td>
-							<td>12:34 PM 2016-10-25</td>
-							<td class="tc"><i class="fa fa-volume-up" aria-hidden="true"></i></td>
-							<td class="tc"><span class="label label-success">Logged</span></td>
-							<td class="tc">
-								<a href="#" class="btn"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="favorite"><i class="fa fa-star-o" aria-hidden="true"></i></td>
-							<td>006</td>
-							<td>Untitled</td>
-							<td>09:08 PM 2016-10-25</td>
-							<td class="tc"><i class="fa fa-volume-up" aria-hidden="true"></i></td>
-							<td class="tc"><span class="label label-success">Logged</span></td>
-							<td class="tc">
-								<a href="#" class="btn"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
-							</td>
-						</tr>
+						<?php foreach ($logs as $key => $log) { 
+							if($log->type != "test" ) { ?>
+								<tr id="<?php echo $log->id;?>">
+									<!-- <td class="favorite"><i class="fa fa-star" aria-hidden="true"></i></td> -->
+									<td><?php echo str_pad($key, 4, '0', STR_PAD_LEFT); ?></td>
+									<td><?php echo format_date($log->date)?></td>
+									<td class="tc"><i class="fa fa-volume-up" aria-hidden="true"></i></td>
+									<td class="tc" class="<?php echo $log->type;?>"><i class="fa <?php echo get_journal_type_icon($log->type);?>" aria-hidden="true"></i></td>
+									<td><?php echo get_value_display($log->value, $log->type); ?>
+									<td class="tc">
+										<a href="javascript:void(0);" class="remove-btn btn" data="<?php echo $log->id;?>"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+									</td>
+								</tr>
+							<?php } 
+						} ?>
 					</tbody>
 					<tfoot>
 						<tr>
@@ -132,6 +81,8 @@ require_once('../inc/sidebar.php');
 				</table>
 			</section>
 		</div>
+		<?php //var_dump($logs); ?>
 	</div>
 </body>
+
 </html>

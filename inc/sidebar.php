@@ -8,7 +8,7 @@ $page_list = $GLOBALS["pages"];
 			<?php 
 			foreach ($page_list as $key => $page):  
 				if($page["active"]) :?>
-					<li class="<?php echo $page['id'] == $page_id? 'active' : ''; ?> page-<?php echo $page['title'];?> page-id-<?php echo $page['id'];?>">
+					<li class="<?php echo $page['id'] == $page_id? 'active' : ''; ?> page-<?php echo $page['slug'];?> page-id-<?php echo $page['id'];?>">
 						<a href="<?php echo $page['url'];?>">
 							<div>
 								<div class="ico">

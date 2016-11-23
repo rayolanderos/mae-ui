@@ -293,8 +293,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 	-webkit-border-radius: none;
 	-moz-border-radius: none;
 	text-align: center;
-	font-size: 11px;
-	line-height: 14px;
+	font-size: 14px;
+    line-height: 18px;
 	height: auto;
 	display: block;
 	color: #555;
@@ -592,7 +592,13 @@ a.m-stats-item:hover{
 .m-icon.shopping-cart {
 	background-position: -90px -950px;
 }
-
+#log-table {
+    font-size: 1.1em;
+}
+#log-table th {
+    font-size: 1.2em;
+    padding: 10px 0px;
+}
 @media (max-width: 768px){
 	.sidebar{
 		width: 100%;

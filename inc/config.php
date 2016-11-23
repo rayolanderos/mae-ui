@@ -10,6 +10,14 @@ $GLOBALS['profile'] = array(
 	"baby_name" => "John Doe", 
 	"baby_gender" => "boy"
 );
+$GLOBALS['api'] = array(
+	"url" =>"http://mae-be.herokuapp.com/journals", 
+	"userId" => array(
+		"GET" => "tester",
+		"POST" => "amzn1.ask.account.AGHEHF4DTFSJQONSB2TECXGN4JB3RXUVTXYTBJQ5QV3MOLQYZ3Z6X33SGEXR4VP7VXONLPPIDK2GWBIAHG7DBYUFCPW5NWWZA52TGO3JXXLONE63AMI6ZLB66WRMYKA3RG7GIYR4A42VRFC7ENHSVWX2BHD5EYHOIC3ULK76VSXGHHVIVGTDLRO664JIE7PLIWVXTH44XSZ3AXA"
+	)
+);
+
 $GLOBALS['pages'] = array(
 	array(
 		"id" => 0,
@@ -131,5 +139,7 @@ $GLOBALS['baby_avgs'] = array(
 		)
 	), 
 ); 
+
+
 
 ?>
