@@ -2,7 +2,7 @@
 
 function get_mae_api($type = ""){
 	
-	$userId = $GLOBALS['api']['userId']["GET"];
+	$userId = $GLOBALS['api']['userId']["POST"];
 	$params = "?userId=".$userId;
 	if($type != "")
 		$params .= "&type=".$type;
@@ -37,13 +37,17 @@ function get_mae_api($type = ""){
 function post_mae_api($type, $content){
 	$userId = $GLOBALS['api']['userId']["POST"];
 
-	$body_data = array('userId'=>$userId,'password'=>'tall');
+	$body_data = array('userId'=>$userId,
+		'type' => $type,
+		'value' => $content,
+		'advice' => false,
+		'source' => 'ui');
 	$body = json_encode($body_data);
 	
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
-	  	CURLOPT_URL => "http://mae-be.herokuapp.com/journals".$params,
+	  	CURLOPT_URL => "http://mae-be.herokuapp.com/journals",
 	  	CURLOPT_RETURNTRANSFER => true,
 	  	CURLOPT_ENCODING => "",
 	  	CURLOPT_MAXREDIRS => 10,
@@ -61,7 +65,28 @@ function post_mae_api($type, $content){
 	curl_close($curl);
 
 	if ($err) {
-		$error = array("error" => true, "details" => $err);
+		$error = array("success" => false, "details" => $err);
+		return $error;
+	} else {
+		$response = array("success" => true, "details" => $response);
+	 	return $response;
+	}
+}
+
+function delete_mae_api($logId){
+
+    $url = "http://mae-be.herokuapp.com/journals/".$logId;
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+	curl_close($curl);
+
+	if ($err) {
+		$error = array("success" => false, "details" => $err);
 		return $error;
 	} else {
 		$response = array("success" => true, "details" => $response);
@@ -92,6 +117,12 @@ function get_journal_type_icon($type){
 		case 'journal':
 			$icon = "fa-sticky-note-o";
 			break;
+		case 'ui':
+			$icon = "fa-pencil";
+			break;
+		case 'alexa':
+			$icon = "fa-volume-up";
+			break;
 		default:
 			$icon = "fa-question";
 			break;
@@ -100,16 +131,11 @@ function get_journal_type_icon($type){
 }
 
 function format_date($date){
-	/* TO DO: Make pretty as: Monday, March 1st, 2016 */
+	/* Make pretty as: Monday, March 1st, 2016 */
 
 	$date = date_create($date);
 	return date_format($date, 'l, F jS, Y');
-	// if (($timestamp = strtotime($str)) === false) {
- //     	return  "Date not available";
-	// } else {
-	// 	$date =  date('l, F jS, Y', $timestamp);
-	// }
-	// return $date;
+
 }
 
 function get_value_display($value, $type){

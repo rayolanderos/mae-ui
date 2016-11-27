@@ -599,6 +599,38 @@ a.m-stats-item:hover{
     font-size: 1.2em;
     padding: 10px 0px;
 }
+#add-log-entry label {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+#add-log-entry {
+    padding: 15px;
+    border: 7px solid #AAA;
+}
+
+input#entry {
+    width: 84%;
+    display: block;
+}
+
+div#input-container {
+    display: block;
+}
+
+div#textarea-container {
+    display: block;
+}
+
+#textarea-container textarea {
+    width: 99%;
+}
+.clear {
+    clear: both;
+}
+
+button#btn-send-entry {
+    margin-right: 13px;
+}
 @media (max-width: 768px){
 	.sidebar{
 		width: 100%;

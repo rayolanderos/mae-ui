@@ -1,5 +1,6 @@
 <?php 
 session_start(); 
+error_reporting(E_ALL);
 require_once('config.php'); 
 require_once('functions.php'); 
 $gender = $GLOBALS['profile']['baby_gender'];
