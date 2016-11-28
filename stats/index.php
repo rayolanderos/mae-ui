@@ -21,30 +21,30 @@ require_once('../inc/sidebar.php');
 						<div class="m-widget-body">
 							<div class="row-fluid">
 								<a href="#" class="span2 m-stats-item">
-									<span class="m-stats-val">4 diapers</span>
-									Wet
+									<span class="m-stats-val"><?php echo get_daily_totals("diaper");?></span>
+									Diapers
 								</a>
 								<a href="#" class="span2 m-stats-item">
-									<span class="m-stats-val">1 diapers</span>
-									Dirty
-								</a>
-								<a href="#" class="span2 m-stats-item">
-									<span class="m-stats-val">11 lbs</span>
+									<span class="m-stats-val"><?php echo get_todays_stat("weight");?> lbs</span>
 									Weight
 								</a>
 								<a href="#" class="span2 m-stats-item">
-									<span class="m-stats-val">20.5"</span>
+									<span class="m-stats-val"><?php echo get_todays_stat("height");?>"</span>
 									Height
 								</a>
 
 								<a href="#" class="span2 m-stats-item">
-									<span class="m-stats-val">14</span>
+									<span class="m-stats-val"><?php echo get_todays_stat("sleep");?></span>
 									Sleep Hours
 								</a href="#">	
 								<a href="#" class="span2 m-stats-item">
-									<span class="m-stats-val">4 log</span>
-									Entries
-								</a>		
+									<span class="m-stats-val"><?php echo get_daily_totals("journal");?></span>
+									Journals
+								</a>	
+								<a href="#" class="span2 m-stats-item">
+									<span class="m-stats-val"><?php echo get_daily_totals();?> entries</span>
+									Total
+								</a>	
 							</div>
 						</div>
 					</div>

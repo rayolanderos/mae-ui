@@ -1,4 +1,70 @@
 <?php 
+function needs_alert(){
+	/*TO DO: setup alert call */
+	return false;
+}
+function get_daily_totals($type = ""){
+	$logs = get_mae_api($type);
+	$today = date("Y-m-d");
+	$count = 0;
+	foreach ($logs as $key => $log) {
+		if($log->date == $today)
+			$count++;
+	}
+	return $count;	
+}
+
+function get_todays_stat($type = ""){
+	$logs = get_mae_api($type);
+	$today = date("Y-m-d");
+	$stat = "";
+	foreach ($logs as $key => $log) {
+		if($log->date == $today)
+			$stat = $log->value;
+	}
+	if($stat == "")
+		$stat = '<sup><i class="fa fa-clock-o" aria-hidden="true"></i></sup>'.get_latest_stat($type);
+	return $stat;	
+}
+
+function get_latest_stat($type = ""){
+	$logs = get_mae_api($type);
+
+	//var_dump($logs);
+	return $logs[0]->value;
+}
+
+function get_mae_api_limit ($type = "", $limit){
+	$logs = get_mae_api($type);
+	return array_slice($logs, 0, $limit, true);
+}
+
+function get_mae_api_day_limit ($type = "", $limit){
+	$logs = get_mae_api($type);
+	$result = array();
+	$previous_date = "";
+	foreach ($logs as $key => $log) {
+		if($key<1){
+			$previous_date = $log->date;
+			$result[$previous_date] = 1;
+		}
+		else{
+			if(count($result)<=$limit){
+				if($previous_date == $log->date){
+					$result[$previous_date]++;
+				}
+				else{
+					$result[$log->date] = 1;
+				}
+				$previous_date = $log->date;
+			}
+			else{
+				return $result;
+			}
+		}
+	}
+	return $result;
+}
 
 function get_mae_api($type = ""){
 	
@@ -135,6 +201,14 @@ function format_date($date){
 
 	$date = date_create($date);
 	return date_format($date, 'l, F jS, Y');
+
+}
+
+function format_date_chart($date){
+	/* Make pretty as: Monday, March 1st, 2016 */
+
+	$date = date_create($date);
+	return date_format($date, 'D M j');
 
 }
 

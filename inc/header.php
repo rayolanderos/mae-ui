@@ -1,6 +1,5 @@
 <?php 
 session_start(); 
-error_reporting(E_ALL);
 require_once('config.php'); 
 require_once('functions.php'); 
 $gender = $GLOBALS['profile']['baby_gender'];
@@ -19,11 +18,15 @@ $gender = $GLOBALS['profile']['baby_gender'];
 	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root_url'];?>/css/<?php echo $gender; ?>.css" />
 	
 	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/bootstrap.min.js"></script>
-	<?php if($page_id == 0 || $page_id ==1 ): ?>
+	<?php if($page_id == 0 || $page_id ==1 ): 
+	$logsSleep = get_mae_api_limit("sleep", 5);
+	$logsDiapers = get_mae_api_day_limit("diaper", 5);
+	?>
 	<script type="text/javascript">
 		<?php if (  $gender == "girl" ): ?>
 			var isGirl = true;
@@ -31,8 +34,15 @@ $gender = $GLOBALS['profile']['baby_gender'];
 			var isGirl = false;
 		<?php endif; ?>
 		<?php 
-		$avgs = $GLOBALS['baby_avgs']; 
-		//$stats = $GLOBALS['baby_stats']; ?>
+		$avgs = $GLOBALS['baby_avgs']; ?>
+		google.load('visualization', '1', {'packages': ['corechart']});
+
+		google.setOnLoadCallback(drawChart);
+
+		var style = 'stroke-color: #006E8E; stroke-opacity: 0.7; stroke-width: 4; fill-color: #8ED5CC; fill-opacity: 0.2';
+		if(isGirl){
+	    	style = 'stroke-color: #E53B60; stroke-opacity: 0.7; stroke-width: 4; fill-color: #F4CAC0; fill-opacity: 0.2';
+	    }
 		var dataWeight = [
 			['Months', 'Your Baby', 'Average'],
 			<?php foreach ($avgs as $key => $avg) {
@@ -48,13 +58,81 @@ $gender = $GLOBALS['profile']['baby_gender'];
 				echo "['".$key."', ".($avgs[$key]["length"][$gender] - 0.2).", ".$avgs[$key]["length"][$gender]."],"."\n";
 			} ?>
 		];
+		var dataSleep = [
+	      	['Day', 'Hours', { role: 'style' }],
+	      	<?php foreach ($logsSleep as $key => $logSleep) { ?>
+		      	['<?php echo format_date_chart($logSleep->date);?>', <?php echo $logSleep->value;?>, style],
+		    <?php } ?>
+	    ];
+	    var dataDiapers = [
+	      	['Day', 'Diapers', { role: 'style' }],
+	      	<?php foreach ($logsDiapers as $key => $logDiaper) { ?>
+		      	['<?php echo format_date_chart($key);?>', <?php echo $logDiaper;?>, style],
+		    <?php } ?>
+	    ];
+
+	    $( window ).resize(function() {
+		  	drawChart();
+		});
+		function drawChart() {
+
+			drawLineChart();
+			drawBarChart();
+
+		}
+
+		function drawLineChart(chartType) {
+
+
+			var options = {
+			  colors:['#4A82B6','#B8C94F']
+			};
+			if(isGirl){
+				options = {
+				  colors:['#00574F','#B8C94F']
+				};	
+			}
+
+			if(google) {
+				var chart = new google.visualization.LineChart(document.getElementById('line-chart'));
+				chartData1 = google.visualization.arrayToDataTable(dataWeight);
+				chart.draw(chartData1, options);
+				
+				<?php if($page_id == 1 ): ?>
+					var chart2 = new google.visualization.LineChart(document.getElementById('height-chart'));
+					chartData2 = google.visualization.arrayToDataTable(dataHeight);
+					chart2.draw(chartData2, options);
+				<?php endif; ?>
+			}
+		}
+
+		function drawBarChart(chartType) {
+			
+			var options = { 
+			  legend: { position: "none" }
+			};
+			
+
+			
+
+			if(google) {
+				var chart = new google.visualization.BarChart(document.getElementById('bar-chart'));
+			
+				dataSleep = google.visualization.arrayToDataTable(dataSleep);
+				
+				chart.draw(dataSleep, options);
+				<?php if($page_id == 1 ): ?>
+					var chart2 = new google.visualization.BarChart(document.getElementById('diapers-chart'));
+					dataDiapers = google.visualization.arrayToDataTable(dataDiapers);
+					chart2.draw(dataDiapers, options);
+				<?php endif; ?>
+			}
+		}
+
+		
 		
 	</script>
-		<?php if($page_id==0): ?>
-			<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/chart.js"></script>
-		<?php elseif ($page_id == 1): ?>
-			<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/stats.js"></script>
-		<?php endif;?>
+		
 	<?php endif;?>
 
 	<!--[if lt IE 9]>

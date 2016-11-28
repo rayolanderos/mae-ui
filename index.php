@@ -12,7 +12,7 @@ require_once('inc/sidebar.php');
 					<h1> Dashboard</h1>
 				</div>
 				<div class="row-fluid">
-
+					<?php if ( needs_alert() ) : ?>
 					<div class="alert alert-info">
 						<button class="close" data-dismiss="alert">x</button>
 						<strong>Warning!</strong> You have not logged your baby's weight in over 10 days.
@@ -20,7 +20,7 @@ require_once('inc/sidebar.php');
 							<span class="label label-important">Log something now</span>	
 						</a>
 					</div>
-
+					<?php endif; ?>
 				</div>
 				<div class="row-fluid">
 					<div class="span4 m-widget">
@@ -37,27 +37,16 @@ require_once('inc/sidebar.php');
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>#0001</td>
-										<td><a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001">Monday, October 10th</a></td>
-										<td class="tr">
-											<a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001" class="btn btn-primary">View</a>
-										</td>
-									</tr>
-									<tr>
-										<td>#0002</td>
-										<td><a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001">Sunday, October 9th</a></td>
-										<td class="tr">
-											<a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001" class="btn btn-primary">View</a>
-										</td>
-									</tr>
-									<tr>
-										<td>#0003</td>
-										<td><a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001">Saturday, October 8th</a></td>
-										<td class="tr">
-											<a href="<?php echo $GLOBALS['root_url'];?>/logs?log_id=0001" class="btn btn-primary">View</a>
-										</td>
-									</tr>
+									<?php $logs = get_mae_api_limit("journal", 5); 
+									foreach ($logs as $key => $log) { ?>
+										<tr>
+											<td><?php echo str_pad($key, 4, '0', STR_PAD_LEFT); ?></td>
+											<td><a href="<?php echo $GLOBALS['root_url'].'/logs?log_id='.$log->id;?>"><?php echo format_date($log->date);?></a></td>
+											<td class="tr">
+												<a href="<?php echo $GLOBALS['root_url'].'/logs?log_id='.$log->id;?>" class="btn btn-primary">View</a>
+											</td>
+										</tr>
+									<?php } ?>
 								</tbody>
 							</table>
 						</div>
@@ -71,22 +60,22 @@ require_once('inc/sidebar.php');
 						<div class="m-widget-body">
 							<div class="row-fluid">
 								<a href="#" class="span3 m-stats-item">
-									<span class="m-stats-val">11 lbs</span>
+									<span class="m-stats-val"><?php echo get_todays_stat("weight");?> lbs</span>
 									Weight
 								</a>
 
 								<a href="#" class="span3 m-stats-item">
-									<span class="m-stats-val">20.5"</span>
+									<span class="m-stats-val"><?php echo get_todays_stat("height");?>"</span>
 									Height
 								</a>
 
 								<a href="#" class="span3 m-stats-item">
-									<span class="m-stats-val">5</span>
+									<span class="m-stats-val"><?php echo get_daily_totals("diaper");?> </span>
 									Diapers
 								</a href="#">
 
 								<a href="#" class="span3 m-stats-item">
-									<span class="m-stats-val">14</span>
+									<span class="m-stats-val"><?php echo get_todays_stat("sleep");?></span>
 									Sleep Hours
 								</a href="#">			
 							</div>
@@ -110,13 +99,6 @@ require_once('inc/sidebar.php');
 							<h3>Baby's Weight</h3>
 						</div>
 						<div class="m-widget-body">
-							<!-- <div class="row-fluid">
-								<div class="btn-group" data-toggle="buttons-radio">
-									<button data="data1" class="btn btn-chart active">Daily</button>
-									<button data="data2" class="btn btn-chart">Weekly</button>
-									<button data="data3" class="btn btn-chart">Monthly</button>
-								</div>
-							</div> -->
 
 							<div id="line-chart">
 								
