@@ -100,7 +100,7 @@ $friend = $pediatrician[0];
 							                  	<button type="submit" class="btn btn-success btn-lg pull-right" >Done <i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
 							                	<div class="clear"></div>
 							                </div>
-							              </div>
+							            </div>
 		                            </form>
 		                        </div>
 		                        <div id="email" class="tab-pane">

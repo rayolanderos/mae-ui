@@ -272,6 +272,38 @@ function get_settings(){
 	
 }
 
+function get_health_report(){
+	
+	$userId = $GLOBALS['api']['userId']["POST"];
+	$params = "?userId=".$userId;
+	
+	//return $params; 
+	$curl = curl_init();
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => "http://mae-be.herokuapp.com/report".$params,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET"
+	));
+	
+	$response = curl_exec($curl);
+	$err = curl_error($curl);
+
+	curl_close($curl);
+
+	if ($err) {
+		$error = array("error" => true, "details" => $err);
+		return $error;
+	} else {
+		$decoded = json_decode($response);
+	 	return $decoded;
+	}
+	
+}
+
 
 
 function post_mae_api($type, $content){
@@ -362,15 +394,16 @@ function post_settings($fname, $lname, $phone, $email, $feedback, $provider, $ch
 		'email' => $email,
 		'phone' => $phone,
 		'provider' => $provider, 
-		'immediateFeedback' => $feedback ,
+		'immediateFeedback' => (bool)$feedback ,
 		'childBirthDate' => $childBirthDate ,
 		'gender' => $gender );
+	//var_dump($body_data);
 	$body = json_encode($body_data);
 	
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
-	  	CURLOPT_URL => "http://mae-be.herokuapp.com/friends",
+	  	CURLOPT_URL => "http://mae-be.herokuapp.com/settings",
 	  	CURLOPT_RETURNTRANSFER => true,
 	  	CURLOPT_ENCODING => "",
 	  	CURLOPT_MAXREDIRS => 10,
@@ -510,6 +543,13 @@ function get_excerpt($string){
 	if(strlen($string) > 60)
 		$string = substr($string,0, 57)."...";
 	return $string;
+}
+
+function parse_gender($gender){
+	if($gender == "male")
+		return "boy";
+	else
+		return "girl";
 }
 
 

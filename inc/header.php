@@ -2,6 +2,34 @@
 session_start(); 
 require_once('config.php'); 
 require_once('functions.php'); 
+if($page_id == 6){
+	if(isset($_REQUEST['fname']) ) {
+		$fname = $_REQUEST['fname'];
+		$lname = $_REQUEST['lname'];
+		$email = $_REQUEST['email'];
+		$phone = $_REQUEST['phone'];
+		$feedback = $_REQUEST['feedback'];
+		$provider = $_REQUEST['provider'];
+		$childBirthDate =  $_REQUEST['childBirthDate'];
+		$gender = $_REQUEST['gender'];
+		
+		if($fname != ""){
+			$result = post_settings($fname, $lname, $phone, $email, $feedback, $provider, $childBirthDate, $gender);
+			$log_saved = $result['success'];
+			if($log_saved)
+				header("Refresh:0");
+		}
+
+	}
+}
+
+$settings = get_settings();
+$GLOBALS['profile']["username"] = "janedoe1";
+$GLOBALS['profile']["name"] = $settings->first." ".$settings->last ;
+$GLOBALS['profile']["email"] = $settings->email;
+$GLOBALS['profile']["baby_birthdate"] = $settings->childBirthDate;
+$GLOBALS['profile']["baby_gender"] = parse_gender($settings->gender);
+
 $gender = $GLOBALS['profile']['baby_gender'];
 ?>
 <!doctype html>

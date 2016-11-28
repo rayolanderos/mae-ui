@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 date_default_timezone_set ("America/Mexico_City");
 $GLOBALS['root_url'] = "http://maejournal.com/demo";
+
 $GLOBALS['profile'] = array(
 	"username" => "janedoe1",
 	"name" => "Jane Doe",
