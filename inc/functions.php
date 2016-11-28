@@ -3,6 +3,59 @@ function needs_alert(){
 	/*TO DO: setup alert call */
 	return false;
 }
+
+function get_average($month, $type){
+	$avgs = $GLOBALS['baby_avgs']; 
+	$gender = $GLOBALS['profile']['baby_gender'];
+	$value = $avgs[0][$type][$gender];
+	switch ($month) {
+		case 0:
+			$value = $avgs[0][$type][$gender];
+			break;
+		case 1:
+			$value = ( ( $avgs[0][$type][$gender]*2 )+$avgs[3][$type][$gender] ) / 3;
+			break;
+		case 2:
+			$value = ( ( $avgs[3][$type][$gender]*2 )+$avgs[0][$type][$gender] ) / 3;
+			break;
+		case 3:
+			$value = $avgs[3][$type][$gender];
+			break;
+		case 4:
+			$value = ( ( $avgs[3][$type][$gender]*2 )+$avgs[6][$type][$gender] ) / 3;
+			break;
+		case 5:
+			$value = ( ( $avgs[6][$type][$gender]*2 )+$avgs[5][$type][$gender] ) / 3;
+			break;
+		case 6:
+			$value = $avgs[6][$type][$gender];
+			break;
+		case 7:
+			$value = ( ( $avgs[6][$type][$gender]*2 )+$avgs[9][$type][$gender] ) / 3;
+			break;
+		case 8:
+			$value = ( ( $avgs[9][$type][$gender]*2 )+$avgs[6][$type][$gender] ) / 3;
+			break;
+		case 9:
+			$value = $avgs[9][$type][$gender];
+			break;
+		case 10:
+			$value = ( ( $avgs[9][$type][$gender]*2 )+$avgs[12][$type][$gender] ) / 3;
+			break;
+		case 11:
+			$value = ( ( $avgs[12][$type][$gender]*2 )+$avgs[9][$type][$gender] ) / 3;
+			break;
+		case 12:
+			$value = $avgs[12][$type][$gender];
+			break;
+		
+		default:
+			$value = $avgs[0][$type][$gender];
+			break;
+	}
+	return $value;
+}
+
 function get_daily_totals($type = ""){
 	$logs = get_mae_api($type);
 	$today = date("Y-m-d");
@@ -25,6 +78,30 @@ function get_todays_stat($type = ""){
 	if($stat == "")
 		$stat = '<sup><i class="fa fa-clock-o" aria-hidden="true"></i></sup>'.get_latest_stat($type);
 	return $stat;	
+}
+
+function get_mae_api_monthly($type=""){
+	$logs = get_mae_api($type);
+	$result = array();
+	$previous_age = "";
+	foreach ($logs as $key => $log) {
+		if($key<1){
+			$previous_age = $log->age;
+			$result[$previous_age] = $log->value;
+		}
+		else{
+			if(isset($result[$log->age])){
+				$old_value = $result[$log->age];
+				$new_value = $log->value;
+				$result[$log->age] = ($old_value + $new_value) / 2;
+			}
+			else{
+				$result[$log->age] = $log->value;
+			}
+		}
+	}
+	ksort($result);
+	return $result;
 }
 
 function get_latest_stat($type = ""){
@@ -100,6 +177,40 @@ function get_mae_api($type = ""){
 	
 }
 
+function get_friends($type = ""){
+	
+	$userId = $GLOBALS['api']['userId']["POST"];
+	$params = "?userId=".$userId;
+	if($type != "")
+		$params .= "&type=".$type;
+	
+	//return $params; 
+	$curl = curl_init();
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => "http://mae-be.herokuapp.com/friends".$params,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET"
+	));
+	
+	$response = curl_exec($curl);
+	$err = curl_error($curl);
+
+	curl_close($curl);
+
+	if ($err) {
+		$error = array("error" => true, "details" => $err);
+		return $error;
+	} else {
+		$decoded = json_decode($response);
+	 	return $decoded;
+	}
+	
+}
+
 function post_mae_api($type, $content){
 	$userId = $GLOBALS['api']['userId']["POST"];
 
@@ -114,6 +225,45 @@ function post_mae_api($type, $content){
 
 	curl_setopt_array($curl, array(
 	  	CURLOPT_URL => "http://mae-be.herokuapp.com/journals",
+	  	CURLOPT_RETURNTRANSFER => true,
+	  	CURLOPT_ENCODING => "",
+	  	CURLOPT_MAXREDIRS => 10,
+	  	CURLOPT_TIMEOUT => 30,
+	  	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	  	CURLOPT_HTTPHEADER => array('Content-Type: application/json'), 
+	  	CURLOPT_POST => 1, 
+		CURLOPT_POSTFIELDS => $body, 
+		CURLOPT_RETURNTRANSFER => true, 
+	));
+	
+	$response = curl_exec($curl);
+	$err = curl_error($curl);
+
+	curl_close($curl);
+
+	if ($err) {
+		$error = array("success" => false, "details" => $err);
+		return $error;
+	} else {
+		$response = array("success" => true, "details" => $response);
+	 	return $response;
+	}
+}
+
+function post_friend($type, $name, $phone, $email){
+	$userId = $GLOBALS['api']['userId']["POST"];
+
+	$body_data = array('userId'=>$userId,
+		'type' => $type,
+		'name' => $name,
+		'email' => $email,
+		'phone' => $phone);
+	$body = json_encode($body_data);
+	
+	$curl = curl_init();
+
+	curl_setopt_array($curl, array(
+	  	CURLOPT_URL => "http://mae-be.herokuapp.com/friends",
 	  	CURLOPT_RETURNTRANSFER => true,
 	  	CURLOPT_ENCODING => "",
 	  	CURLOPT_MAXREDIRS => 10,

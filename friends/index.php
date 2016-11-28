@@ -1,15 +1,18 @@
 <?php 
 $page_id = 4; 
-$friend_count = 6;
+//$friend_count = 6;
 
 require_once('../inc/header.php');
 require_once('../inc/sidebar.php');
+$friends = get_friends("friend"); 
+var_dump($friends);
 ?>
 	<div class="main-container">
 		<div class="container-fluid">
 			<section>
 				<div class="page-header">
 					<h1><?php echo $GLOBALS["pages"][$page_id]["title"]?></h1>
+					<button id="btn-add-friend" class="btn btn-primary pull-right">Add a new friend <i class="fa fa-plus" aria-hidden="true"></i></button>
 				</div>
 
 				<div class="row">

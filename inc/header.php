@@ -24,8 +24,10 @@ $gender = $GLOBALS['profile']['baby_gender'];
 	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/bootstrap.min.js"></script>
 	<?php if($page_id == 0 || $page_id ==1 ): 
-	$logsSleep = get_mae_api_limit("sleep", 5);
-	$logsDiapers = get_mae_api_day_limit("diaper", 5);
+	$logsSleep = get_mae_api_limit("sleep", 10);
+	$logsDiapers = get_mae_api_day_limit("diaper", 10);
+	$logsHeight = get_mae_api_monthly("height");
+	$logsWeight = get_mae_api_monthly("weight");
 	?>
 	<script type="text/javascript">
 		<?php if (  $gender == "girl" ): ?>
@@ -45,17 +47,14 @@ $gender = $GLOBALS['profile']['baby_gender'];
 	    }
 		var dataWeight = [
 			['Months', 'Your Baby', 'Average'],
-			<?php foreach ($avgs as $key => $avg) {
-				if($key<=6)
-					echo "['".$key."', ".($avgs[$key]["weight"][$gender] - 0.5).", ".$avgs[$key]["weight"][$gender]."],"."\n";
-				else
-					echo "['".$key."', null, ".$avgs[$key]["weight"][$gender]."],"."\n";
+			<?php foreach ($logsWeight as $key => $logsWeight) { 
+				echo "['".$key."', ".$logsWeight.", ".get_average($key, "weight")."],"."\n";
 			} ?>
 		];
 		var dataHeight = [
 			['Months', 'Your Baby', 'Average'],
-			<?php foreach ($avgs as $key => $avg) { 
-				echo "['".$key."', ".($avgs[$key]["length"][$gender] - 0.2).", ".$avgs[$key]["length"][$gender]."],"."\n";
+			<?php foreach ($logsHeight as $key => $logHeight) { 
+				echo "['".$key."', ".$logHeight.", ".get_average($key, "height")."],"."\n";
 			} ?>
 		];
 		var dataSleep = [
@@ -206,6 +205,7 @@ $gender = $GLOBALS['profile']['baby_gender'];
 			<div class="span4"></div>
 		</div>
 	</div>
+
 	</body>
 </html>
 <?php 

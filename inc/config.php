@@ -95,7 +95,7 @@ $GLOBALS['baby_avgs'] = array(
 			"boy" => 7.4, 
 			"girl" => 7.15
 		), 
-		"length" => array( 
+		"height" => array( 
 			"boy" => 19.6, 
 			"girl" => 19.4
 		)
@@ -105,7 +105,7 @@ $GLOBALS['baby_avgs'] = array(
 			"boy" => (13.0 + 15.2)/2, 
 			"girl" => (11.8 + 14.0)/2
 		), 
-		"length" => array( 
+		"height" => array( 
 			"boy" => (23.6 + 24.7)/2, 
 			"girl" => (23.0 + 24.1)/2
 		)
@@ -115,7 +115,7 @@ $GLOBALS['baby_avgs'] = array(
 			"boy" => (16.2 + 18.8)/2, 
 			"girl" => (14.8 + 17.5)/2
 		), 
-		"length" => array( 
+		"height" => array( 
 			"boy" => (26.1 + 27.2)/2, 
 			"girl" => (25.3 + 26.5)/2
 		)
@@ -125,7 +125,7 @@ $GLOBALS['baby_avgs'] = array(
 			"boy" => (18.2 + 21.1)/2, 
 			"girl" => (16.7 + 19.7)/2
 		), 
-		"length" => array( 
+		"height" => array( 
 			"boy" => (27.7 + 28.9)/2, 
 			"girl" => (27.0 + 28.3)/2
 		)
@@ -135,7 +135,7 @@ $GLOBALS['baby_avgs'] = array(
 			"boy" => (19.8 + 22.9)/2, 
 			"girl" => (8.2 + 21.4)/2
 		), 
-		"length" => array( 
+		"height" => array( 
 			"boy" => (29.2 + 30.5)/2, 
 			"girl" => (28.5 + 29.8)/2
 		)

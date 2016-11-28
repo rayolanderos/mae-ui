@@ -37,7 +37,7 @@ require_once('inc/sidebar.php');
 									</tr>
 								</thead>
 								<tbody>
-									<?php $logs = get_mae_api_limit("journal", 5); 
+									<?php $logs = get_mae_api_limit("journal", 3); 
 									foreach ($logs as $key => $log) { ?>
 										<tr>
 											<td><?php echo str_pad($key, 4, '0', STR_PAD_LEFT); ?></td>
