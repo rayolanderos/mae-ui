@@ -13,16 +13,18 @@ $gender = $GLOBALS['profile']['baby_gender'];
 	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root_url'];?>/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root_url'];?>/css/bootstrap-responsive.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root_url'];?>/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root_url'];?>/css/featherlight.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root_url'];?>/css/font-awesome.min.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,300i,400,400i,600,700" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo $GLOBALS['root_url'];?>/css/<?php echo $gender; ?>.css" />
-	
+
 	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
 
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/featherlight.js"></script>
 	<?php if($page_id == 0 || $page_id ==1 ): 
 	$logsSleep = get_mae_api_limit("sleep", 10);
 	$logsDiapers = get_mae_api_day_limit("diaper", 10);
@@ -46,13 +48,13 @@ $gender = $GLOBALS['profile']['baby_gender'];
 	    	style = 'stroke-color: #E53B60; stroke-opacity: 0.7; stroke-width: 4; fill-color: #F4CAC0; fill-opacity: 0.2';
 	    }
 		var dataWeight = [
-			['Months', 'Your Baby', 'Average'],
+			['Months', 'Your Baby', 'Average Baby'],
 			<?php foreach ($logsWeight as $key => $logsWeight) { 
 				echo "['".$key."', ".$logsWeight.", ".get_average($key, "weight")."],"."\n";
 			} ?>
 		];
 		var dataHeight = [
-			['Months', 'Your Baby', 'Average'],
+			['Months', 'Your Baby', 'Average Baby'],
 			<?php foreach ($logsHeight as $key => $logHeight) { 
 				echo "['".$key."', ".$logHeight.", ".get_average($key, "height")."],"."\n";
 			} ?>
@@ -84,11 +86,58 @@ $gender = $GLOBALS['profile']['baby_gender'];
 
 
 			var options = {
-			  colors:['#4A82B6','#B8C94F']
+			  	colors:['#4A82B6','#B8C94F'], 
+			  	chartArea: {width: '85%', height: '70%'},
+				legend: {position: 'in'},
+			   	vAxis: {
+			   		textStyle: {fontName: 'Source Sans Pro'},
+		          	title: 'Lbs',
+		          	logScale: true
+		        },
+		        hAxis: {
+		          	title: 'Months',
+		          	logScale: false
+		        }
+			};
+			var options2 = {
+			  	colors:['#4A82B6','#B8C94F'], 
+			  	chartArea: {width: '85%', height: '70%'},
+				legend: {position: 'in'},
+			   	vAxis: {
+		          	title: 'Inches',
+		          	logScale: true
+		        },
+		        hAxis: {
+		          	title: 'Months',
+		          	logScale: false
+		        }
 			};
 			if(isGirl){
 				options = {
-				  colors:['#00574F','#B8C94F']
+				  	colors:['#00574F','#B8C94F'], 
+				  	chartArea: {width: '85%', height: '70%'},
+					legend: {position: 'in'},
+				   	vAxis: {
+			          	title: 'Lbs',
+			          	logScale: true
+			        },
+			        hAxis: {
+			          	title: 'Months',
+			          	logScale: false
+			        } 
+				};
+				options2 = {
+				  	colors:['#00574F','#B8C94F'], 
+				  	chartArea: {width: '85%', height: '70%'},
+					legend: {position: 'in'},
+				   	vAxis: {
+			          	title: 'Inches',
+			          	logScale: true
+			        },
+			        hAxis: {
+			          	title: 'Months',
+			          	logScale: false
+			        } 
 				};	
 			}
 
@@ -100,7 +149,7 @@ $gender = $GLOBALS['profile']['baby_gender'];
 				<?php if($page_id == 1 ): ?>
 					var chart2 = new google.visualization.LineChart(document.getElementById('height-chart'));
 					chartData2 = google.visualization.arrayToDataTable(dataHeight);
-					chart2.draw(chartData2, options);
+					chart2.draw(chartData2, options2);
 				<?php endif; ?>
 			}
 		}
@@ -108,7 +157,7 @@ $gender = $GLOBALS['profile']['baby_gender'];
 		function drawBarChart(chartType) {
 			
 			var options = { 
-			  legend: { position: "none" }
+			  	legend: { position: "none" }
 			};
 			
 

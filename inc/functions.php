@@ -56,6 +56,35 @@ function get_average($month, $type){
 	return $value;
 }
 
+function get_mae_api_single($id){
+	
+	//return $params; 
+	$curl = curl_init();
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => "http://mae-be.herokuapp.com/journals/".$id,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET"
+	));
+	
+	$response = curl_exec($curl);
+	$err = curl_error($curl);
+
+	curl_close($curl);
+
+	if ($err) {
+		$error = array("error" => true, "details" => $err);
+		return $error;
+	} else {
+		$decoded = json_decode($response);
+	 	return $decoded;
+	}
+
+}
+
 function get_daily_totals($type = ""){
 	$logs = get_mae_api($type);
 	$today = date("Y-m-d");
@@ -76,7 +105,7 @@ function get_todays_stat($type = ""){
 			$stat = $log->value;
 	}
 	if($stat == "")
-		$stat = '<sup><i class="fa fa-clock-o" aria-hidden="true"></i></sup>'.get_latest_stat($type);
+		$stat = '<sup><i class="fa fa-clock-o" aria-hidden="true"></i></sup> '.get_latest_stat($type);
 	return $stat;	
 }
 
@@ -211,6 +240,40 @@ function get_friends($type = ""){
 	
 }
 
+function get_settings(){
+	
+	$userId = $GLOBALS['api']['userId']["POST"];
+	$params = "?userId=".$userId;
+	
+	//return $params; 
+	$curl = curl_init();
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => "http://mae-be.herokuapp.com/settings".$params,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET"
+	));
+	
+	$response = curl_exec($curl);
+	$err = curl_error($curl);
+
+	curl_close($curl);
+
+	if ($err) {
+		$error = array("error" => true, "details" => $err);
+		return $error;
+	} else {
+		$decoded = json_decode($response);
+	 	return $decoded;
+	}
+	
+}
+
+
+
 function post_mae_api($type, $content){
 	$userId = $GLOBALS['api']['userId']["POST"];
 
@@ -250,14 +313,58 @@ function post_mae_api($type, $content){
 	}
 }
 
-function post_friend($type, $name, $phone, $email){
+function post_friend($type, $name, $phone, $email, $nickname){
 	$userId = $GLOBALS['api']['userId']["POST"];
 
 	$body_data = array('userId'=>$userId,
 		'type' => $type,
 		'name' => $name,
 		'email' => $email,
+		'nickname' => $nickname,
 		'phone' => $phone);
+	$body = json_encode($body_data);
+	
+	$curl = curl_init();
+
+	curl_setopt_array($curl, array(
+	  	CURLOPT_URL => "http://mae-be.herokuapp.com/friends",
+	  	CURLOPT_RETURNTRANSFER => true,
+	  	CURLOPT_ENCODING => "",
+	  	CURLOPT_MAXREDIRS => 10,
+	  	CURLOPT_TIMEOUT => 30,
+	  	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	  	CURLOPT_HTTPHEADER => array('Content-Type: application/json'), 
+	  	CURLOPT_POST => 1, 
+		CURLOPT_POSTFIELDS => $body, 
+		CURLOPT_RETURNTRANSFER => true, 
+	));
+	
+	$response = curl_exec($curl);
+	$err = curl_error($curl);
+
+	curl_close($curl);
+
+	if ($err) {
+		$error = array("success" => false, "details" => $err);
+		return $error;
+	} else {
+		$response = array("success" => true, "details" => $response);
+	 	return $response;
+	}
+}
+
+function post_settings($fname, $lname, $phone, $email, $feedback, $provider, $childBirthDate, $gender){
+	$userId = $GLOBALS['api']['userId']["POST"];
+
+	$body_data = array('userId'=>$userId,
+		'first' => $fname,
+		'last' => $lname,
+		'email' => $email,
+		'phone' => $phone,
+		'provider' => $provider, 
+		'immediateFeedback' => $feedback ,
+		'childBirthDate' => $childBirthDate ,
+		'gender' => $gender );
 	$body = json_encode($body_data);
 	
 	$curl = curl_init();
@@ -360,6 +467,13 @@ function format_date_chart($date){
 	$date = date_create($date);
 	return date_format($date, 'D M j');
 
+}
+
+function get_value_display_long($value, $type){
+	if($type == "journal")
+		return $value; 
+	else
+		return get_value_display($value, $type);
 }
 
 function get_value_display($value, $type){

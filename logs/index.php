@@ -67,11 +67,12 @@ if(isset($_REQUEST['entry']) ) {
 							if($log->type != "test" ) { ?>
 								<tr id="<?php echo $log->id;?>">
 									<!-- <td class="favorite"><i class="fa fa-star" aria-hidden="true"></i></td> -->
-									<td><a href=""><?php echo str_pad($key, 4, '0', STR_PAD_LEFT); ?></a></td>
+
+									<td><a id="open-<?php echo $log->id;?>" href="#" data-featherlight="../inc/log.php?id=<?php echo $log->id;?>" data-featherlight-type="ajax"><?php echo str_pad($key, 4, '0', STR_PAD_LEFT); ?></a></td>
 									<td><?php echo format_date($log->date)?></td>
 									<td class="tc"><i class="fa <?php echo get_journal_type_icon($log->source); ?>" aria-hidden="true"></i></td>
 									<td class="tc" class="<?php echo $log->type;?>"><i class="fa <?php echo get_journal_type_icon($log->type);?>" aria-hidden="true"></i></td>
-									<td><?php echo get_value_display($log->value, $log->type); ?>
+									<td><?php echo get_value_display($log->value, $log->type); ?></td>
 									<td class="tc">
 										<a href="javascript:void(0);" class="btn-remove btn" data="<?php echo $log->id;?>"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
 									</td>
@@ -130,6 +131,10 @@ if(isset($_REQUEST['entry']) ) {
 				}
 			});
 		});
+		<?php 
+		if (isset($_GET['log_id'])) { ?>
+			$("#open-<?php echo $_GET['log_id']; ?>").click();
+		<?php } ?>
 	});
 
 	</script>
