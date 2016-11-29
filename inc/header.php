@@ -16,8 +16,6 @@ if($page_id == 6){
 		if($fname != ""){
 			$result = post_settings($fname, $lname, $phone, $email, $feedback, $provider, $childBirthDate, $gender);
 			$log_saved = $result['success'];
-			if($log_saved)
-				header("Refresh:0");
 		}
 
 	}

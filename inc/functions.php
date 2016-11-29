@@ -1,8 +1,51 @@
 <?php 
 
 function needs_alert(){
-	/*TO DO: setup alert call */
-	return false;
+	$logs = get_mae_api($type="journal");
+	$log = $logs[0];
+	$treshold = strtotime("-10 days");
+	
+	$last = strtotime($log->date);
+
+	if($last<=$treshold)
+		return true; 
+	else
+		return false;
+}
+
+function trigger_alert(){
+	$userId = $GLOBALS['api']['userId']["POST"];
+
+	$body_data = array('userId'=>$userId);
+	$body = json_encode($body_data);
+	
+	$curl = curl_init();
+
+	curl_setopt_array($curl, array(
+	  	CURLOPT_URL => "http://mae-be.herokuapp.com/reminder",
+	  	CURLOPT_RETURNTRANSFER => true,
+	  	CURLOPT_ENCODING => "",
+	  	CURLOPT_MAXREDIRS => 10,
+	  	CURLOPT_TIMEOUT => 30,
+	  	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	  	CURLOPT_HTTPHEADER => array('Content-Type: application/json'), 
+	  	CURLOPT_POST => 1, 
+		CURLOPT_POSTFIELDS => $body, 
+		CURLOPT_RETURNTRANSFER => true, 
+	));
+	
+	$response = curl_exec($curl);
+	$err = curl_error($curl);
+
+	curl_close($curl);
+
+	if ($err) {
+		$error = array("success" => false, "details" => $err);
+		return $error;
+	} else {
+		$response = array("success" => true, "details" => $response);
+	 	return $response;
+	}
 }
 
 function get_average($month, $type){
@@ -14,37 +57,37 @@ function get_average($month, $type){
 			$value = $avgs[0][$type][$gender];
 			break;
 		case 1:
-			$value = ( ( $avgs[0][$type][$gender]*2 )+$avgs[3][$type][$gender] ) / 3;
+			$value = ( ( $avgs[0][$type][$gender] * 2 )+$avgs[3][$type][$gender] ) / 3;
 			break;
 		case 2:
-			$value = ( ( $avgs[3][$type][$gender]*2 )+$avgs[0][$type][$gender] ) / 3;
+			$value = ( ( $avgs[3][$type][$gender] * 2 )+$avgs[0][$type][$gender] ) / 3;
 			break;
 		case 3:
 			$value = $avgs[3][$type][$gender];
 			break;
 		case 4:
-			$value = ( ( $avgs[3][$type][$gender]*2 )+$avgs[6][$type][$gender] ) / 3;
+			$value = ( ( $avgs[3][$type][$gender] * 2 )+$avgs[6][$type][$gender] ) / 3;
 			break;
 		case 5:
-			$value = ( ( $avgs[6][$type][$gender]*2 )+$avgs[5][$type][$gender] ) / 3;
+			$value = ( ( $avgs[6][$type][$gender] * 2 )+$avgs[5][$type][$gender] ) / 3;
 			break;
 		case 6:
 			$value = $avgs[6][$type][$gender];
 			break;
 		case 7:
-			$value = ( ( $avgs[6][$type][$gender]*2 )+$avgs[9][$type][$gender] ) / 3;
+			$value = ( ( $avgs[6][$type][$gender] * 2 )+$avgs[9][$type][$gender] ) / 3;
 			break;
 		case 8:
-			$value = ( ( $avgs[9][$type][$gender]*2 )+$avgs[6][$type][$gender] ) / 3;
+			$value = ( ( $avgs[9][$type][$gender] * 2 )+$avgs[6][$type][$gender] ) / 3;
 			break;
 		case 9:
 			$value = $avgs[9][$type][$gender];
 			break;
 		case 10:
-			$value = ( ( $avgs[9][$type][$gender]*2 )+$avgs[12][$type][$gender] ) / 3;
+			$value = ( ( $avgs[9][$type][$gender] * 2 )+$avgs[12][$type][$gender] ) / 3;
 			break;
 		case 11:
-			$value = ( ( $avgs[12][$type][$gender]*2 )+$avgs[9][$type][$gender] ) / 3;
+			$value = ( ( $avgs[12][$type][$gender] * 2 )+$avgs[9][$type][$gender] ) / 3;
 			break;
 		case 12:
 			$value = $avgs[12][$type][$gender];
