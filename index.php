@@ -59,21 +59,21 @@ require_once('inc/sidebar.php');
 						<?php $personality = get_latest_health_stats(); ?>
 						<div class="m-widget-body">
 							<div class="row-fluid">
-								<a href="javascript:void(0);" class="span3 m-stats-item">
+								<a href="javascript:void(0);" class="span3 m-stats-item" data-featherlight="./inc/personality.php?personality=agreeableness" data-featherlight-type="ajax">
 									<span class="m-stats-val"><?php echo sprintf("%.2f%%", $personality->big5_agreeableness * 100);?></span>
-									Agreeableness
+									Agreeableness <i class="fa fa-question-circle" aria-hidden="true"></i>
 								</a>
-								<a href="javascript:void(0);" class="span3 m-stats-item">
+								<a href="javascript:void(0);" class="span3 m-stats-item" data-featherlight="./inc/personality.php?personality=conscientiousness" data-featherlight-type="ajax">
 									<span class="m-stats-val"><?php echo sprintf("%.2f%%", $personality->big5_conscientiousness * 100);?></span>
-									Conscientiousness
+									Conscientiousness <i class="fa fa-question-circle" aria-hidden="true"></i>
 								</a>
-								<a href="javascript:void(0);" class="span3 m-stats-item">
+								<a href="javascript:void(0);" class="span3 m-stats-item" data-featherlight="./inc/personality.php?personality=extraversion" data-featherlight-type="ajax">
 									<span class="m-stats-val"><?php echo sprintf("%.2f%%", $personality->big5_extraversion * 100);?></span>
-									Extraversion
+									Extraversion <i class="fa fa-question-circle" aria-hidden="true"></i>
 								</a>
-								<a href="javascript:void(0);" class="span3 m-stats-item">
+								<a href="javascript:void(0);" class="span3 m-stats-item" data-featherlight="./inc/personality.php?personality=openness" data-featherlight-type="ajax">
 									<span class="m-stats-val"><?php echo sprintf("%.2f%%", $personality->big5_openness * 100);?></span>
-									Openness
+									Openness <i class="fa fa-question-circle" aria-hidden="true"></i>
 								</a>
 							</div>
 						</div>
@@ -85,7 +85,7 @@ require_once('inc/sidebar.php');
 				<div class="row-fluid m-fluid">
 					<div class="span6 m-widget">
 						<div class="m-widget-header">
-							<h3>Anger</h3>
+							<h3><img class="mood-icon" src="<?php echo $GLOBALS['root_url'];?>/img/anger.png"/> Anger <a href="#" data-featherlight="./inc/mood.php?mood=anger" data-featherlight-type="ajax"><sup><i class="fa fa-question-circle" aria-hidden="true"></i></sup></a></h3>
 						</div>
 						<div class="m-widget-body">
 							<div id="chart-anger">
@@ -95,10 +95,10 @@ require_once('inc/sidebar.php');
 					</div>
 					<div class="span6 m-widget">
 						<div class="m-widget-header">
-							<h3>Anxiety</h3>
+							<h3><img class="mood-icon" src="<?php echo $GLOBALS['root_url'];?>/img/vulnerability.png"/>Vulnerability <a href="#" data-featherlight="./inc/mood.php?mood=vulnerability" data-featherlight-type="ajax"><sup><i class="fa fa-question-circle" aria-hidden="true"></i></sup></a></h3>
 						</div>
 						<div class="m-widget-body">
-							<div id="chart-anxiety">
+							<div id="chart-vulnerability">
 
 							</div>
 						</div>
@@ -107,17 +107,17 @@ require_once('inc/sidebar.php');
 				<div class="row-fluid m-fluid">
 					<div class="span6 m-widget">
 						<div class="m-widget-header">
-							<h3>Vulnerability</h3>
+							<h3><img class="mood-icon" src="<?php echo $GLOBALS['root_url'];?>/img/anxiety.png"/>Anxiety <a href="#" data-featherlight="./inc/mood.php?mood=anxiety" data-featherlight-type="ajax"><sup><i class="fa fa-question-circle" aria-hidden="true"></i></sup></a></h3>
 						</div>
 						<div class="m-widget-body">
-							<div id="chart-vulnerability">
+							<div id="chart-anxiety">
 
 							</div>
 						</div>
 					</div>
 					<div class="span6 m-widget">
 						<div class="m-widget-header">
-							<h3>Depression</h3>
+							<h3><img class="mood-icon" src="<?php echo $GLOBALS['root_url'];?>/img/depression.png"/>Depression <a href="#" data-featherlight="./inc/mood.php?mood=depression" data-featherlight-type="ajax"><sup><i class="fa fa-question-circle" aria-hidden="true"></i></sup></a></h3>
 						</div>
 						<div class="m-widget-body">
 							<div id="chart-depression">
@@ -129,7 +129,7 @@ require_once('inc/sidebar.php');
 				<div class="row-fluid m-fluid">
 					<div class="span6 m-widget">
 						<div class="m-widget-header">
-							<h3>Self Consciousness</h3>
+							<h3><img class="mood-icon" src="<?php echo $GLOBALS['root_url'];?>/img/self-consciousness.png"/>Self Consciousness <a href="" data-featherlight="./inc/mood.php?mood=self-consciousness" data-featherlight-type="ajax"><sup><i class="fa fa-question-circle" aria-hidden="true"></i></sup></a></h3>
 						</div>
 						<div class="m-widget-body">
 							<div id="chart-self-consciousness">
@@ -139,7 +139,7 @@ require_once('inc/sidebar.php');
 					</div>
 					<div class="span6 m-widget">
 						<div class="m-widget-header">
-							<h3>Inmmoderation</h3>
+							<h3><img class="mood-icon" src="<?php echo $GLOBALS['root_url'];?>/img/immoderation.png"/>Inmmoderation <a href="" data-featherlight="./inc/mood.php?mood=immoderation" data-featherlight-type="ajax"><sup><i class="fa fa-question-circle" aria-hidden="true"></i></sup></a></h3>
 						</div>
 						<div class="m-widget-body">
 							<div id="chart-immoderation">

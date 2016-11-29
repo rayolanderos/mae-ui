@@ -595,5 +595,262 @@ function parse_gender($gender){
 		return "girl";
 }
 
+function get_personality_name($personality){
+	switch ($personality) {
+		case 'agreeableness':
+			return "Agreeableness";
+			break;
+		case 'conscientiousness':
+			return "Conscientiousness";
+			break;
+		case 'extraversion':
+			return "Extraversion";
+			break;
+		case 'openness':
+			return "Openness";
+			break;
+		default:
+			return "Unknown";
+			break;
+	}
+	return "Unknown";
+}
+
+function get_personality_meaning($personality){
+	switch ($personality) {
+		case 'agreeableness':
+			return "is a person's tendency to be compassionate and cooperative toward others";
+			break;
+		case 'conscientiousness':
+			return "is a person's tendency to act in an organized or thoughtful way.";
+			break;
+		case 'extraversion':
+			return "is a person's tendency to seek stimulation in the company of others.";
+			break;
+		case 'openness':
+			return "is the extent to which a person is open to experiencing a variety of activities.";
+			break;
+		default:
+			return "Unknown";
+			break;
+	}
+	return "Unknown";
+}
+
+function get_personality_descriptors($personality, $level){
+	switch ($personality) {
+		case 'agreeableness':
+			if($level == "low"){
+				return array(
+					"Self-focused" => "You are more concerned with taking care of yourself than taking time for others.",
+					"Contrary" => 	"You do not shy away from contradicting others.",
+					"Proud" =>	"You hold yourself in high regard and are satisfied with who you are.",
+					"Compromising" =>	"You are comfortable using every trick in the book to get what you want.", 
+					"Hard-hearted" =>	"You think people should generally rely more on themselves than on others.",
+					"Cautious of others" =>	"You are wary of other people's intentions and do not trust easily."
+				);
+			}
+			else{
+				return array(
+					"Altruistic" =>	"You feel fulfilled when helping others and will go out of your way to do so.",
+					"Accommodating" =>	"You are easy to please and try to avoid confrontation.",
+					"Modest" =>	"You are uncomfortable being the center of attention.",
+					"Uncompromising" =>	"You think it is wrong to take advantage of others to get ahead.",
+					"Empathetic" =>	"You feel what others feel and are compassionate toward them.",
+					"Trusting of others" =>	"You believe the best of others and trust people easily."
+				);
+			}
+			break;
+		case 'conscientiousness':
+			if($level == "low"){
+				return array(
+					"Content" => "You are content with your level of accomplishment and do not feel the need to set ambitious goals.",
+					"Bold" => "You would rather take action immediately than spend time deliberating making a decision.",
+					"Carefree" => "You do what you want, disregarding rules and obligations.",
+					"Unstructured" => "You do not make a lot of time for organization in your daily life.",
+					"Intermittent" => "You have a hard time sticking with difficult tasks for a long period of time.",
+					"Self-doubting" => "You frequently doubt your ability to achieve your goals."
+				);
+			}
+			else{
+				return array(
+					"Driven" => "You set high goals for yourself and work hard to achieve them.",
+					"Deliberate" => "You carefully think through decisions before making them.",
+					"Dutiful" => "You take rules and obligations seriously, even when they are inconvenient.",
+					"Organized" => "You feel a strong need for structure in your life.",
+					"Persistent" => "You can tackle and stick with tough tasks.",
+					"Self-assured" => "You feel you have the ability to succeed in the tasks you set out to do."
+				);
+			}
+			break;
+		case 'extraversion':
+			if($level == "low"){
+				return array(
+					"Laid-back" => "You appreciate a relaxed pace in life.",
+					"Demure" => "You prefer to listen than to talk, especially in group settings.",
+					"Solemn" => "You are generally serious and do not joke much.",
+					"Calm-seeking" => "You prefer activities that are quiet, calm, and safe.",
+					"Reserved" => "You are a private person and do not let many people in.",
+					"Independent" => "You have a strong desire to have time to yourself."
+				);
+			}
+			else{
+				return array(
+					"Energetic" => "You enjoy a fast-paced, busy schedule with many activities.",
+					"Assertive" => "You tend to speak up and take charge of situations, and you are comfortable leading groups.",
+					"Cheerful" => "You are a joyful person and share that joy with the world.",
+					"Excitement-seeking" => "You are excited by taking risks and feel bored without lots of action going on.",
+					"Outgoing" => "You make friends easily and feel comfortable around other people.",
+					"Sociable" => "You enjoy being in the company of others."
+				);
+			}
+			break;
+		case 'openness':
+			if($level == "low"){
+				return array(
+					"Consistent" => "You enjoy familiar routines and prefer not to deviate from them.",
+					"Unconcerned with art" => "You are less concerned with artistic or creative activities than most people.",
+					"Dispassionate" => "You do not frequently think about or openly express your emotions.",
+					"Down-to-earth" => "You prefer facts over fantasy.",
+					"Concrete" => "You prefer dealing with the world as it is, rarely considering abstract ideas.",
+					"Respectful of authority" => "You prefer following with tradition to maintain a sense of stability."
+				);
+			}
+			else{
+				return array(
+					"Adventurous" => "You are eager to experience new things.",
+					"Appreciative of art" => "You enjoy beauty and seek out creative experiences.",
+					"Emotionally aware" => "You are aware of your feelings and how to express them.",
+					"Imaginative" => "You have a wild imagination.",
+					"Philosophical" => "You are open to and intrigued by new ideas and love to explore them.",
+					"Authority-challenging" => "You prefer to challenge authority and traditional values to help bring about change."
+				);
+			}
+			break;
+		default:
+			return "Unknown";
+			break;
+	}
+	return "Unknown";
+}
+
+function get_mood_name($mood){
+	switch ($mood) {
+		case 'anger':
+			return "Anger";
+			break;
+		case 'anxiety':
+			return "Anxiety";
+			break;
+		case 'immoderation':
+			return "Immoderation";
+			break;
+		case 'depression':
+			return "Depression";
+			break;
+		case 'self-consciousness':
+			return "Self Consciousness";
+			break;
+		case 'vulnerability':
+			return "Vulnerability";
+			break;
+		default:
+			return "Unknown";
+			break;
+	}
+	return "Unknown";
+}
+
+
+function get_mood_facet($mood, $level){
+	switch ($mood) {
+		case 'anger':
+			if($level == "low")
+				return "Mild-tempered";
+			else
+				return "Fiery";
+			break;
+		case 'anxiety':
+			if($level == "low")
+				return "Self-assured";
+			else
+				return "Prone to worry";
+			break;
+		case 'immoderation':
+			if($level == "low")
+				return "Self-controlled";
+			else
+				return "Hedonistic";
+			break;
+		case 'depression':
+			if($level == "low")
+				return "Content";
+			else
+				return "Melancholy";
+			break;
+		case 'self-consciousness':
+			if($level == "low")
+				return "Confident";
+			else
+				return "Self-conscious";
+			break;
+		case 'vulnerability':
+			if($level == "low")
+				return "Calm under pressure";
+			else
+				return "Susceptible to stress";
+			break;
+		default:
+			return "Unknown";
+			break;
+	}
+	return "Unknown";
+}
+
+function get_mood_descriptor($mood, $level){
+	switch ($mood) {
+		case 'anger':
+			if($level == "low")
+				return "It takes a lot to get you angry.";
+			else
+				return "You have a fiery temper, especially when things do not go your way.";
+			break;
+		case 'anxiety':
+			if($level == "low")
+				return "You tend to feel calm and self-assured.";
+			else
+				return "You tend to worry about things that might happen.";
+			break;
+		case 'immoderation':
+			if($level == "low")
+				return "You have control over your desires, which are not particularly intense.";
+			else
+				return "You feel your desires strongly and are easily tempted by them.";
+			break;
+		case 'depression':
+			if($level == "low")
+				return "You are generally comfortable with yourself as you are.";
+			else
+				return "You think quite often about the things you are unhappy about.";
+			break;
+		case 'self-consciousness':
+			if($level == "low")
+				return "You are hard to embarrass and are self-confident most of the time.";
+			else
+				return "You are sensitive about what others might be thinking of you.";
+			break;
+		case 'vulnerability':
+			if($level == "low")
+				return "You handle unexpected events calmly and effectively.";
+			else
+				return "You are easily overwhelmed in stressful situations.";
+			break;
+		default:
+			return "Unknown";
+			break;
+	}
+	return "Unknown";
+}
+
 
 ?>

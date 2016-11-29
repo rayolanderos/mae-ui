@@ -449,6 +449,9 @@ form#add-friend-form {
 .m-fluid{
 	margin: 10px 0;
 }
+.well li {
+    line-height: 20px;
+}
 
 .m-widget{
 	border: 1px solid #E5E5E5;
@@ -456,6 +459,17 @@ form#add-friend-form {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	padding: 5px;
+	background: #FFF;
+}
+.m-stats-item {
+    text-align: center;
+}
+.span6.m-widget {
+    margin-bottom: 25px;
+}
+img.mood-icon {
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .m-widget-header{
@@ -463,7 +477,7 @@ form#add-friend-form {
 }
 
 .m-widget-header h3	{
-	border-bottom: 1px solid #E5E5E5;
+	/*border-bottom: 1px solid #E5E5E5;*/
 	color: #333;
 }
 

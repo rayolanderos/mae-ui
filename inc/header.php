@@ -24,7 +24,6 @@ if($page_id == 6){
 }
 
 $settings = get_settings();
-$GLOBALS['profile']["username"] = "janedoe1";
 $GLOBALS['profile']["name"] = $settings->first." ".$settings->last ;
 $GLOBALS['profile']["email"] = $settings->email;
 $GLOBALS['profile']["baby_birthdate"] = $settings->childBirthDate;
@@ -188,9 +187,6 @@ $gender = $GLOBALS['profile']['baby_gender'];
 			  	legend: { position: "none" }
 			};
 			
-
-			
-
 			if(google) {
 				var chart = new google.visualization.BarChart(document.getElementById('bar-chart'));
 			
@@ -229,37 +225,37 @@ $gender = $GLOBALS['profile']['baby_gender'];
 		var dataAnger = [
 			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
 			<?php foreach ($mood_report as $key => $report) { 
-				echo "[".$key.", ".$report["anger"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Anger rating:</b> ".round($report["anger"],4)."</p></div>'],"."\n";
+				echo "[".$key.", ".$report["anger"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Anger level:</b> ".sprintf("%.2f%%", $report["anger"] * 100)."</p></div>'],"."\n";
 			} ?>
 		];
 		var dataAnxiety = [
 			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
 			<?php foreach ($mood_report as $key => $report) { 
-				echo "[".$key.", ".$report["anxiety"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Anxiety rating:</b> ".round($report["anxiety"],4)."</p></div>'],"."\n";
+				echo "[".$key.", ".$report["anxiety"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Anxiety level:</b> ".sprintf("%.2f%%",$report["anxiety"] * 100)."</p></div>'],"."\n";
 			} ?>
 		];
 		var dataDepression = [
 			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
 			<?php foreach ($mood_report as $key => $report) { 
-				echo "[".$key.", ".$report["depression"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Depression rating:</b> ".round($report["depression"],4)."</p></div>'],"."\n";
+				echo "[".$key.", ".$report["depression"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Depression level:</b> ".sprintf("%.2f%%", $report["depression"] * 100)."</p></div>'],"."\n";
 			} ?>
 		];
 		var dataImmoderation = [
 			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
 			<?php foreach ($mood_report as $key => $report) { 
-				echo "[".$key.", ".$report["depression"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Immoderation rating:</b> ".round($report["immoderation"],4)."</p></div>'],"."\n";
+				echo "[".$key.", ".$report["depression"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Immoderation level:</b> ".sprintf("%.2f%%", $report["immoderation"] * 100)."</p></div>'],"."\n";
 			} ?>
 		];
 		var dataVulnerability = [
 			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
 			<?php foreach ($mood_report as $key => $report) { 
-				echo "[".$key.", ".$report["vulnerability"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Vulnerability rating:</b> ".round($report["vulnerability"],4)."</p></div>'],"."\n";
+				echo "[".$key.", ".$report["vulnerability"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Vulnerability level:</b> ".sprintf("%.2f%%", $report["vulnerability"] * 100)."</p></div>'],"."\n";
 			} ?>
 		];
 		var dataSelfConsciousness = [
 			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
 			<?php foreach ($mood_report as $key => $report) { 
-				echo "[".$key.", ".$report["self_consciousness"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Self Consciousness rating:</b> ".round($report["self_consciousness"],4)."</p></div>'],"."\n";
+				echo "[".$key.", ".$report["self_consciousness"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Self Consciousness level:</b> ".sprintf("%.2f%%", $report["self_consciousness"] * 100)."</p></div>'],"."\n";
 			} ?>
 		];
 
@@ -419,9 +415,9 @@ $gender = $GLOBALS['profile']['baby_gender'];
 			<div class="container-fluid">
 				<a class="brand m-brand" href="<?php echo $GLOBALS['root_url'];?>">M&auml;e</a>
 				
-	            <form class="form-search m-search span5">
+	           <!--  <form class="form-search m-search span5">
 					<input type="text" placeholder="Type to search" class="span5 search-query">
-				</form>
+				</form> -->
 
 				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 		            <span class="icon-bar"></span>
