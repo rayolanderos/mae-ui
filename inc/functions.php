@@ -1,4 +1,5 @@
 <?php 
+
 function needs_alert(){
 	/*TO DO: setup alert call */
 	return false;
@@ -272,6 +273,7 @@ function get_settings(){
 	
 }
 
+
 function get_health_report(){
 	
 	$userId = $GLOBALS['api']['userId']["POST"];
@@ -299,9 +301,50 @@ function get_health_report(){
 		return $error;
 	} else {
 		$decoded = json_decode($response);
+		
 	 	return $decoded;
 	}
 	
+}
+
+function get_mood_report(){
+	/* Moods:
+	* anger
+	* anxiety
+	* depression
+	* immoderation
+	* self_consciousness
+	* vulnerability
+    */
+	$report = get_health_report();
+	$reversed = array_reverse($report);
+	$mood_report = array();
+	foreach ($reversed as $key => $entry) {
+		$mood_report[] = array( 
+			"date" => format_date($entry->date),
+			"anger" => $entry->facet_anger, 
+			"anxiety" => $entry->facet_anxiety, 
+			"depression" => $entry->facet_depression, 
+			"immoderation" => $entry->facet_immoderation, 
+			"self_consciousness" => $entry->facet_self_consciousness, 
+			"vulnerability" => $entry->facet_vulnerability
+		);
+	}
+
+	return $mood_report;
+}
+
+function get_latest_health_stats(){
+	/* Types:
+	* agreeableness
+	* conscientiousness
+	* extraversion
+	* openness
+	*/
+	$report = get_health_report();
+	$report = $report[0];
+
+	return $report;
 }
 
 

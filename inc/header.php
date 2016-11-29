@@ -53,7 +53,7 @@ $gender = $GLOBALS['profile']['baby_gender'];
 	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/main.js"></script>
 	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?php echo $GLOBALS['root_url'];?>/js/featherlight.js"></script>
-	<?php if($page_id == 0 || $page_id ==1 ): 
+	<?php if( $page_id ==1 ): 
 	$logsSleep = get_mae_api_limit("sleep", 10);
 	$logsDiapers = get_mae_api_day_limit("diaper", 10);
 	$logsHeight = get_mae_api_monthly("height");
@@ -206,6 +206,196 @@ $gender = $GLOBALS['profile']['baby_gender'];
 		}
 
 		
+		
+	</script>
+		
+	<?php endif;?>
+
+
+	<?php if( $page_id == 0 ):  
+	$mood_report = get_mood_report(); ?>
+	<script type="text/javascript">
+		<?php if (  $gender == "girl" ): ?>
+			var isGirl = true;
+		<?php else : ?>
+			var isGirl = false;
+		<?php endif; ?>
+		<?php 
+		$avgs = $GLOBALS['baby_avgs']; ?>
+		google.load('visualization', '1', {'packages': ['corechart']});
+
+		google.setOnLoadCallback(drawChart);
+
+		var dataAnger = [
+			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
+			<?php foreach ($mood_report as $key => $report) { 
+				echo "[".$key.", ".$report["anger"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Anger rating:</b> ".round($report["anger"],4)."</p></div>'],"."\n";
+			} ?>
+		];
+		var dataAnxiety = [
+			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
+			<?php foreach ($mood_report as $key => $report) { 
+				echo "[".$key.", ".$report["anxiety"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Anxiety rating:</b> ".round($report["anxiety"],4)."</p></div>'],"."\n";
+			} ?>
+		];
+		var dataDepression = [
+			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
+			<?php foreach ($mood_report as $key => $report) { 
+				echo "[".$key.", ".$report["depression"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Depression rating:</b> ".round($report["depression"],4)."</p></div>'],"."\n";
+			} ?>
+		];
+		var dataImmoderation = [
+			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
+			<?php foreach ($mood_report as $key => $report) { 
+				echo "[".$key.", ".$report["depression"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Immoderation rating:</b> ".round($report["immoderation"],4)."</p></div>'],"."\n";
+			} ?>
+		];
+		var dataVulnerability = [
+			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
+			<?php foreach ($mood_report as $key => $report) { 
+				echo "[".$key.", ".$report["vulnerability"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Vulnerability rating:</b> ".round($report["vulnerability"],4)."</p></div>'],"."\n";
+			} ?>
+		];
+		var dataSelfConsciousness = [
+			['Entry', 'Raiting', {type: 'string', role: 'tooltip', 'p': {'html': true}}],
+			<?php foreach ($mood_report as $key => $report) { 
+				echo "[".$key.", ".$report["self_consciousness"].", '<div class=\"chart-tooltip\"><p><b>Date:</b> ".$report['date']."<br><b>Self Consciousness rating:</b> ".round($report["self_consciousness"],4)."</p></div>'],"."\n";
+			} ?>
+		];
+
+	    $( window ).resize(function() {
+		  	drawChart();
+		});
+		function drawChart() {
+
+			drawLineCharts();
+
+		}
+
+		function drawLineCharts(chartType) {
+			var optionsAnger = {
+			  	colors:['#CB6449'], 
+			  	tooltip: {isHtml: true},
+			  	chartArea: {width: '100%', height: '100%'},
+				legend: {position: 'none'},
+				vAxis:{
+		         	baselineColor: '#fff',
+		         	gridlineColor: '#E5E5E5',
+		         	textPosition: 'none'
+		       	},
+		       	hAxis:{
+         			baselineColor: '#fff',
+         			gridlineColor: '#fff',
+         			textPosition: 'none'
+       			}
+			};
+			var optionsAnxiety = {
+			  	colors:['#E6B845'], 
+			  	tooltip: {isHtml: true},
+			  	chartArea: {width: '100%', height: '100%'},
+				legend: {position: 'none'},
+				vAxis:{
+		         	baselineColor: '#fff',
+		         	gridlineColor: '#E5E5E5',
+		         	textPosition: 'none'
+		       	},
+		       	hAxis:{
+         			baselineColor: '#fff',
+         			gridlineColor: '#fff',
+         			textPosition: 'none'
+       			}
+			};
+			var optionsDepression = {
+			  	colors:['#4976BF'], 
+			  	tooltip: {isHtml: true},
+			  	chartArea: {width: '100%', height: '100%'},
+				legend: {position: 'none'},
+				vAxis:{
+		         	baselineColor: '#fff',
+		         	gridlineColor: '#E5E5E5',
+		         	textPosition: 'none'
+		       	},
+		       	hAxis:{
+         			baselineColor: '#fff',
+         			gridlineColor: '#fff',
+         			textPosition: 'none'
+       			}
+			};
+			var optionsImmoderation = {
+			  	colors:['#614DC8'], 
+			  	tooltip: {isHtml: true},
+			  	chartArea: {width: '100%', height: '100%'},
+				legend: {position: 'none'},
+				vAxis:{
+		         	baselineColor: '#fff',
+		         	gridlineColor: '#E5E5E5',
+		         	textPosition: 'none'
+		       	},
+		       	hAxis:{
+         			baselineColor: '#fff',
+         			gridlineColor: '#fff',
+         			textPosition: 'none'
+       			}
+			};
+			var optionsSelfConsciousness = {
+			  	colors:['#53A969'], 
+			  	tooltip: {isHtml: true},
+			  	chartArea: {width: '100%', height: '100%'},
+				legend: {position: 'none'},
+				vAxis:{
+		         	baselineColor: '#fff',
+		         	gridlineColor: '#E5E5E5',
+		         	textPosition: 'none'
+		       	},
+		       	hAxis:{
+         			baselineColor: '#fff',
+         			gridlineColor: '#fff',
+         			textPosition: 'none'
+       			}
+			};
+			var optionsVulnerability = {
+			  	colors:['#6C6C6C'], 
+			  	tooltip: {isHtml: true},
+			  	chartArea: {width: '100%', height: '100%'},
+				legend: {position: 'none'},
+				vAxis:{
+		         	baselineColor: '#fff',
+		         	gridlineColor: '#E5E5E5',
+		         	textPosition: 'none'
+		       	},
+		       	hAxis:{
+         			baselineColor: '#fff',
+         			gridlineColor: '#fff',
+         			textPosition: 'none'
+       			}
+			};
+
+			if(google) {
+				var chartAnger = new google.visualization.AreaChart(document.getElementById('chart-anger'));
+				chartDataAnger = google.visualization.arrayToDataTable(dataAnger);
+				chartAnger.draw(chartDataAnger, optionsAnger);
+
+				var chartAnxiety = new google.visualization.AreaChart(document.getElementById('chart-anxiety'));
+				chartDataAnxiety = google.visualization.arrayToDataTable(dataAnxiety);
+				chartAnxiety.draw(chartDataAnxiety, optionsAnxiety);
+
+				var chartDepression = new google.visualization.AreaChart(document.getElementById('chart-depression'));
+				chartDataDepression = google.visualization.arrayToDataTable(dataDepression);
+				chartDepression.draw(chartDataDepression, optionsDepression);
+
+				var chartSelfConsciousness = new google.visualization.AreaChart(document.getElementById('chart-self-consciousness'));
+				chartDataSelfConsciousness = google.visualization.arrayToDataTable(dataSelfConsciousness);
+				chartSelfConsciousness.draw(chartDataSelfConsciousness, optionsSelfConsciousness);
+
+				var chartVulnerability = new google.visualization.AreaChart(document.getElementById('chart-vulnerability'));
+				chartDataVulnerability = google.visualization.arrayToDataTable(dataVulnerability);
+				chartVulnerability.draw(chartDataVulnerability, optionsVulnerability);
+
+				var chartImmoderation = new google.visualization.AreaChart(document.getElementById('chart-immoderation'));
+				chartDataImmoderation = google.visualization.arrayToDataTable(dataImmoderation);
+				chartImmoderation.draw(chartDataImmoderation, optionsImmoderation);
+			}
+		}
 		
 	</script>
 		

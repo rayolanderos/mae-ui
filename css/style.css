@@ -207,7 +207,12 @@ span.input-panel-text {
 #form-settings{
 	margin-bottom: 30px;
 }
-
+.chart-tooltip {
+    padding: 10px 10px 5px 10px;
+}
+.page-subheader h2 {
+    margin-top: 20px;
+}
 #form-settings {
     width: 50%;
 }

@@ -51,60 +51,103 @@ require_once('inc/sidebar.php');
 							</table>
 						</div>
 					</div>
-
+					
 					<div class="span8 m-widget">
 						<div class="m-widget-header">
-							<h3>Today stats</h3>
+							<h3>Your Personality Report</h3>
 						</div>
-
+						<?php $personality = get_latest_health_stats(); ?>
 						<div class="m-widget-body">
 							<div class="row-fluid">
-								<a href="#" class="span3 m-stats-item">
-									<span class="m-stats-val"><?php echo get_todays_stat("weight");?> lbs</span>
-									Weight
+								<a href="javascript:void(0);" class="span3 m-stats-item">
+									<span class="m-stats-val"><?php echo sprintf("%.2f%%", $personality->big5_agreeableness * 100);?></span>
+									Agreeableness
 								</a>
-
-								<a href="#" class="span3 m-stats-item">
-									<span class="m-stats-val"><?php echo get_todays_stat("height");?>"</span>
-									Height
+								<a href="javascript:void(0);" class="span3 m-stats-item">
+									<span class="m-stats-val"><?php echo sprintf("%.2f%%", $personality->big5_conscientiousness * 100);?></span>
+									Conscientiousness
 								</a>
-
-								<a href="#" class="span3 m-stats-item">
-									<span class="m-stats-val"><?php echo get_daily_totals("diaper");?> </span>
-									Diapers
-								</a href="#">
-
-								<a href="#" class="span3 m-stats-item">
-									<span class="m-stats-val"><?php echo get_todays_stat("sleep");?></span>
-									Sleep Hours
-								</a href="#">			
+								<a href="javascript:void(0);" class="span3 m-stats-item">
+									<span class="m-stats-val"><?php echo sprintf("%.2f%%", $personality->big5_extraversion * 100);?></span>
+									Extraversion
+								</a>
+								<a href="javascript:void(0);" class="span3 m-stats-item">
+									<span class="m-stats-val"><?php echo sprintf("%.2f%%", $personality->big5_openness * 100);?></span>
+									Openness
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
-
+				<div class="page-subheader">
+					<h2> Your Moods</h2>
+				</div>
 				<div class="row-fluid m-fluid">
 					<div class="span6 m-widget">
 						<div class="m-widget-header">
-							<h3>Baby's Sleep Hours</h3>
+							<h3>Anger</h3>
 						</div>
 						<div class="m-widget-body">
-							<div id="bar-chart">
+							<div id="chart-anger">
 
 							</div>
 						</div>
 					</div>
 					<div class="span6 m-widget">
 						<div class="m-widget-header">
-							<h3>Baby's Weight</h3>
+							<h3>Anxiety</h3>
 						</div>
 						<div class="m-widget-body">
+							<div id="chart-anxiety">
 
-							<div id="line-chart">
-								
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="row-fluid m-fluid">
+					<div class="span6 m-widget">
+						<div class="m-widget-header">
+							<h3>Vulnerability</h3>
+						</div>
+						<div class="m-widget-body">
+							<div id="chart-vulnerability">
+
+							</div>
+						</div>
+					</div>
+					<div class="span6 m-widget">
+						<div class="m-widget-header">
+							<h3>Depression</h3>
+						</div>
+						<div class="m-widget-body">
+							<div id="chart-depression">
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid m-fluid">
+					<div class="span6 m-widget">
+						<div class="m-widget-header">
+							<h3>Self Consciousness</h3>
+						</div>
+						<div class="m-widget-body">
+							<div id="chart-self-consciousness">
+
+							</div>
+						</div>
+					</div>
+					<div class="span6 m-widget">
+						<div class="m-widget-header">
+							<h3>Inmmoderation</h3>
+						</div>
+						<div class="m-widget-body">
+							<div id="chart-immoderation">
+
+							</div>
+						</div>
+					</div>
+					
 				</div>
 			</section>
 		</div>
