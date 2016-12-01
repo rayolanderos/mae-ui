@@ -360,7 +360,7 @@ function get_mood_report(){
 	* vulnerability
     */
 	$report = get_health_report();
-	$reversed = array_reverse($report);
+	$reversed = $report; //array_reverse($report);
 	$mood_report = array();
 	foreach ($reversed as $key => $entry) {
 		$mood_report[] = array( 
@@ -385,6 +385,7 @@ function get_latest_health_stats(){
 	* openness
 	*/
 	$report = get_health_report();
+	$report = array_reverse($report);
 	$report = $report[0];
 
 	return $report;
