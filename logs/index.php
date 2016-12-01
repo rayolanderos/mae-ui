@@ -68,7 +68,7 @@ if(isset($_REQUEST['entry']) ) {
 								<tr id="<?php echo $log->id;?>">
 									<!-- <td class="favorite"><i class="fa fa-star" aria-hidden="true"></i></td> -->
 
-									<td><a id="open-<?php echo $log->id;?>" href="#" data-featherlight="../inc/log.php?id=<?php echo $log->id;?>" data-featherlight-type="ajax"><?php echo str_pad($key, 4, '0', STR_PAD_LEFT); ?></a></td>
+									<td><a id="open-<?php echo $log->id;?>" href="#" data-featherlight="../inc/log.php?id=<?php echo $log->id;?>" data-featherlight-type="ajax"><?php echo str_pad($key+1, 4, '0', STR_PAD_LEFT); ?></a></td>
 									<td><?php echo format_date($log->date)?></td>
 									<td class="tc"><i class="fa <?php echo get_journal_type_icon($log->source); ?>" aria-hidden="true"></i></td>
 									<td class="tc" class="<?php echo $log->type;?>"><i class="fa <?php echo get_journal_type_icon($log->type);?>" aria-hidden="true"></i></td>

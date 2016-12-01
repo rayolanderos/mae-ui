@@ -40,7 +40,7 @@ require_once('inc/sidebar.php');
 									<?php $logs = get_mae_api_limit("journal", 3); 
 									foreach ($logs as $key => $log) { ?>
 										<tr>
-											<td><?php echo str_pad($key, 4, '0', STR_PAD_LEFT); ?></td>
+											<td><?php echo str_pad($key+1, 4, '0', STR_PAD_LEFT); ?></td>
 											<td><a href="<?php echo $GLOBALS['root_url'].'/logs?log_id='.$log->id;?>"><?php echo format_date($log->date);?></a></td>
 											<td class="tr">
 												<a href="<?php echo $GLOBALS['root_url'].'/logs?log_id='.$log->id;?>" class="btn btn-primary">View</a>
